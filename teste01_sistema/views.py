@@ -49,7 +49,7 @@ def verificar_sala(salaId):
         return 0
 
 def criar_item():
-    query = "INSERT INTO item (tombo, tipo, ident, idSala) VALUES (%s, %s, %s, %s)"
+    query = "INSERT INTO item (tombo, tipo, ident, salaId) VALUES (%s, %s, %s, %s)"
     itens = []
     itens.append(str(input("Indique o tombo do item: ")))
     itens.append(str(input("Indique o tipo do item: ")))
