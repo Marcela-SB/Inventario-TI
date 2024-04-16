@@ -11,7 +11,7 @@ print(mydb)
 
 mycursor = mydb.cursor()
 
-# funções 
+# funções  
 
 # ok
 def mostrar_salas():
@@ -50,7 +50,7 @@ def buscar_item(tombo):
     mycursor.execute(query, val)
     list = mycursor.fetchall()
     for c in list:
-        print(f"{c[0]:<10}{"  sala: "}{c[1]:<3}{" predio: "}{c[2]:<10}")
+        print(f'{c[0]:<10}{"  sala: "}{c[1]:<3}{" predio: "}{c[2]:<10}')
 
 
 def tranferir_item():

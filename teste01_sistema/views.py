@@ -1,4 +1,7 @@
 import mysql.connector
+from funcs import * 
+
+tab = "\t"
 
 mydb = mysql.connector.connect(
     host="localhost",
@@ -12,6 +15,82 @@ print(mydb)
 mycursor = mydb.cursor()
 
 # funcoes
+
+def menu_salas():
+    print("\n\t"f"{'MENU DE SALAS':^}")
+    print("\t"f"{'1 - VER SALA':^}")
+    print("\t"f"{'2 - EDITAR SALA':^}")
+    print("\t"f"{'3 - ADICIONAR SALA':^}") 
+    print("\t"f"{'9 - EXCLUIR SALA':^}\n") 
+    opc = str(input("\t"f"{'SELECIONE UMA OPÇÃO:':^}"))
+    
+    # switch py
+    if opc == '1':
+        #ver_sala()
+        print("1")
+    elif opc == '2':
+        #editar_sala()
+        print("2")
+    elif opc == '3':
+        #adicionar_sala()
+        print("3")
+    elif opc == '9':
+        #deletar_sala()
+        print("9")
+        
+def menu_itens():
+    print("\n\t"f"{'MENU DE SALAS':^}")
+    print("\t"f"{'1 - LISTAR TODOS OS ITENS':^}")
+    print("\t"f"{'2 - PESQUISAR ITEM':^}")
+    print("\t"f"{'3 - ADICIONAR ITEM':^}")
+    print("\t"f"{'4 - EDITAR ITEM':^}")  
+    print("\t"f"{'9 - EXCLUIR ITEM':^}\n") 
+    opc = str(input("\t"f"{'SELECIONE UMA OPÇÃO:':^}"))
+    
+    # switch py
+    if opc == '1':
+        #listar_itens()
+        print("1")
+    elif opc == '2':
+        #buscar_itens()
+        print("2")
+    elif opc == '3':
+        #adicionar_item()
+        print("3")
+    elif opc == '4':
+        #editar_item()
+        print("4")
+    elif opc == '9':
+        #deletar_item()
+        print("9")
+
+
+def menu_inicial():
+    print("\n\t"f"{'MENU INICIAL':^}")
+    print("\t"f"{'1 - MENU DE SALAS':^}")
+    print("\t"f"{'2 - MENU DE ITENS':^}")
+    print("\t"f"{'3 - MENU DE MOVIMENTAÇÃO':^}\n") 
+    opc = str(input("\t"f"{'SELECIONE UMA OPÇÃO:':^}"))
+    
+    # switch py
+    if opc == '1':
+        menu_salas()
+        print("1")
+    elif opc == '2':
+        menu_itens()
+        print("2")
+    elif opc == '3':
+        #menu_historico()
+        print("3")
+        
+        
+        
+    
+    
+
+
+
+
 
 def criar_sala():
     query = "INSERT INTO salas (salaId, descricao) VALUES (%s, %s)"
@@ -70,8 +149,10 @@ def criar_item():
     mycursor.execute(query, itens)
     mydb.commit()
 
-criar_sala()
-criar_item()
+#criar_sala()
+#criar_item()
+
+menu_inicial()
 
 """
 # excluindo tabela para ser criada novamente (já que é apenas um teste)
