@@ -8,6 +8,7 @@ class Application():
         self.root = root
         self.tela()
         self.framesDaTela()
+        self.menu()
         self.criandoBotoes()
         self.objetos()
         root.mainloop()
@@ -21,7 +22,7 @@ class Application():
         #self.root.maxsize(width="", heigth="")  #TAMANHO MÁXIMO 
         #self.root.minsize(width="", heigth="")  #TAMANHO MÍNIMO
         
-# ----------- FRAME PRINCIPAL -----------
+
 
 # ----------- FRAME PRINCIPAL -----------
     def framesDaTela(self):
@@ -39,6 +40,64 @@ class Application():
             relheight=0.78
         )
 
+
+# ----------- ABAS MENU -----------
+    def menu(self):
+        button_1 = Button(
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: print("button_1 clicked (impressão)"),
+            relief="flat"
+        )
+        button_1.place(
+            x=805.0,
+            y=139.0,
+            width=224.0,
+            height=81.0
+        )
+
+        button_2 = Button(
+            background='#f0f0f0',
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: print("button_2 clicked (histórico)"),
+            relief="flat"
+        )
+        button_2.place(
+            x=546.0,
+            y=139.0,
+            width=224.0,
+            height=81.0
+        )
+
+        button_3 = Button(
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: print("button_3 clicked (procurar)"),
+            relief="flat"
+        )
+        button_3.place(
+            x=287.0,
+            y=139.0,
+            width=224.0,
+            height=81.0
+        )
+
+        button_4 = Button(
+            background = 'red',
+            text = 'Gerenciar', 
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: print("button_4 clicked (gerenciar)"),
+            relief="flat"
+        )
+
+        button_4.place(  
+            x=28.0,
+            y=139.0,
+            width=224.0,
+            height=81.0
+        )
 
 
 
