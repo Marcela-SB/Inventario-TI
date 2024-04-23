@@ -17,13 +17,12 @@ class Application():
     def tela(self):
         self.root.title("Sistema de Inventário")
         self.root.configure(bg= "#29273A")
-        self.root.geometry("1440x1000")
+        self.root.geometry("1200x900") # Largura x Altura
         self.root.resizable(False, False)          #RESPONSIVIDADE
         #self.root.maxsize(width="", heigth="")  #TAMANHO MÁXIMO 
         #self.root.minsize(width="", heigth="")  #TAMANHO MÍNIMO
         
-
-
+        
 # ----------- FRAME PRINCIPAL -----------
     def framesDaTela(self):
         self.frame_principal = Frame(       # DETALHES DO FRAME PRINCIPAL
@@ -40,6 +39,81 @@ class Application():
             relheight=0.78
         )
 
+        self.separator = Frame(
+            self.frame_principal, 
+            bg="#9B9B9B", 
+            height=2, 
+            bd=0
+         )
+        self.separator.place(
+            relx=0.01, 
+            rely=0.55, 
+            relwidth=0.98)
+
+
+# ----------- ABAS MENU -----------
+    def menu(self):
+        aba_1 = Button( 
+            bg="#D9D9D9",
+            text = 'Gerenciar', 
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: print("aba_1 clicked (gerenciar)"),
+            relief="flat"
+        )
+
+        aba_1.place(  
+            x=28.0,
+            y=139.0,
+            width=224.0,
+            height=81.0
+        )
+
+        aba_2 = Button( 
+            bg="#D9D9D9",
+            text = 'Procurar',
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: print("aba_2 clicked (procurar)"),
+            relief="flat"
+        )
+        aba_2.place(
+            x=287.0,
+            y=139.0,
+            width=224.0,
+            height=81.0
+        )
+
+        aba_3 = Button( 
+            bg="#D9D9D9",
+            text = 'Histórico',
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: print("aba_3 clicked (histórico)"),
+            relief="flat"
+        )
+        aba_3.place(
+            x=546.0,
+            y=139.0,
+            width=224.0,
+            height=81.0
+        )
+
+
+        aba_4 = Button( 
+            bg="#D9D9D9",
+            text = 'Impressão',
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: print("aba_4 clicked (impressão)"),
+            relief="flat"
+        )
+        aba_4.place(
+            x=805.0,
+            y=139.0,
+            width=224.0,
+            height=81.0
+        )
 
 # ----------- ABAS MENU -----------
     def menu(self):
@@ -103,17 +177,43 @@ class Application():
 
 # ----------- BOTÕES ----------- 
     def criandoBotoes(self):
-        self.btBuscar = Button(
-            self.frame_principal, 
-            text="Buscar"
+        self.btAdicionar = Button(
+            self.frame_principal,
+            bg= "#2EC27B",
+            fg= "#FFFFFF",
+            text="Adicionar",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Adicionar")
         )
 
-        self.btBuscar.place(
+        self.btAdicionar.place(
+            relx= 0.8, 
+            rely=0.4, 
+            relwidth=0.1, 
+            relheight=0.1
+        )
+
+        
+        self.btExcluir = Button(
+            self.frame_principal,
+            bg= "#C22E2E",
+            fg= "#FFFFFF",
+            text="Excluir",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Excluir")
+        )
+
+        self.btExcluir.place(
             relx= 0.8, 
             rely=0.8, 
             relwidth=0.1, 
-            relheight=0.15
+            relheight=0.1
         )
+
 
 # ----------- LABELS E INPUTS ----------- 
     def objetos(self):
