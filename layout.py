@@ -1,4 +1,6 @@
 from tkinter import *
+from PIL import ImageTk, Image
+import os
 
 root = Tk()
 
@@ -8,6 +10,7 @@ class Application():
         self.root = root
         self.tela()
         self.framesDaTela()
+        self.id()
         self.menu()
         self.criandoBotoes()
         self.objetos()
@@ -22,7 +25,6 @@ class Application():
         #self.root.maxsize(width="", heigth="")  #TAMANHO MÁXIMO 
         #self.root.minsize(width="", heigth="")  #TAMANHO MÍNIMO
         
-        
 # ----------- FRAME PRINCIPAL -----------
     def framesDaTela(self):
         self.frame_principal = Frame(       # DETALHES DO FRAME PRINCIPAL
@@ -34,7 +36,7 @@ class Application():
         )
         self.frame_principal.place(         # POSIÇÃO (relativa) DO FRAME PRINCIPAL
             relx= 0.01, 
-            rely=0.2, 
+            rely=0.205, 
             relwidth=0.98, 
             relheight=0.78
         )
@@ -52,10 +54,44 @@ class Application():
 
 
 # ----------- ABAS MENU -----------
+    def id(self):
+        titulo = Label(
+            anchor="nw",
+            text="Inventário T.I. DEART",
+            fg= "#D9D9D9",
+            bg= "#29273A",
+            font=("Inter Black", 40 * -1, "bold")
+        )
+        titulo.place(
+            x= 12.0,
+            y= 36.0
+        )
+
+        # Carregar a imagem
+        imagem_path = os.path.join(os.path.dirname(__file__), "ufrn.png")
+        imagem = Image.open(imagem_path)
+        imagem = imagem.resize((187, 100), Image.ANTIALIAS)  # Largura x Altura
+        imagem = ImageTk.PhotoImage(imagem)
+
+        # Adicionar a imagem ao widget Label
+        self.label_imagem = Label(
+            self.root, 
+            image=imagem, 
+            bg="#29273A"
+        )
+        self.label_imagem.imagem = imagem  # Mantém uma referência para evitar que a imagem seja coletada pelo garbage collector
+        self.label_imagem.place(
+            relx=0.82, 
+            rely=0.01
+        )
+
+
+# ----------- ABAS MENU -----------
     def menu(self):
         aba_1 = Button( 
             bg="#D9D9D9",
             text = 'Gerenciar', 
+            font= ("Inter Regular", 20 * -1),
             borderwidth=0,
             highlightthickness=0,
             command=lambda: print("aba_1 clicked (gerenciar)"),
@@ -64,14 +100,16 @@ class Application():
 
         aba_1.place(  
             x=28.0,
-            y=139.0,
+            y=120.0, #139
             width=224.0,
             height=81.0
+
         )
 
         aba_2 = Button( 
             bg="#D9D9D9",
             text = 'Procurar',
+            font= ("Inter Regular", 20 * -1),
             borderwidth=0,
             highlightthickness=0,
             command=lambda: print("aba_2 clicked (procurar)"),
@@ -79,7 +117,7 @@ class Application():
         )
         aba_2.place(
             x=287.0,
-            y=139.0,
+            y=120.0,
             width=224.0,
             height=81.0
         )
@@ -87,6 +125,7 @@ class Application():
         aba_3 = Button( 
             bg="#D9D9D9",
             text = 'Histórico',
+            font= ("Inter Regular", 20 * -1),
             borderwidth=0,
             highlightthickness=0,
             command=lambda: print("aba_3 clicked (histórico)"),
@@ -94,7 +133,7 @@ class Application():
         )
         aba_3.place(
             x=546.0,
-            y=139.0,
+            y=120.0,
             width=224.0,
             height=81.0
         )
@@ -103,6 +142,7 @@ class Application():
         aba_4 = Button( 
             bg="#D9D9D9",
             text = 'Impressão',
+            font= ("Inter Regular", 20 * -1),
             borderwidth=0,
             highlightthickness=0,
             command=lambda: print("aba_4 clicked (impressão)"),
@@ -110,69 +150,10 @@ class Application():
         )
         aba_4.place(
             x=805.0,
-            y=139.0,
+            y=120.0,
             width=224.0,
             height=81.0
         )
-
-# ----------- ABAS MENU -----------
-    def menu(self):
-        button_1 = Button(
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: print("button_1 clicked (impressão)"),
-            relief="flat"
-        )
-        button_1.place(
-            x=805.0,
-            y=139.0,
-            width=224.0,
-            height=81.0
-        )
-
-        button_2 = Button(
-            background='#f0f0f0',
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: print("button_2 clicked (histórico)"),
-            relief="flat"
-        )
-        button_2.place(
-            x=546.0,
-            y=139.0,
-            width=224.0,
-            height=81.0
-        )
-
-        button_3 = Button(
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: print("button_3 clicked (procurar)"),
-            relief="flat"
-        )
-        button_3.place(
-            x=287.0,
-            y=139.0,
-            width=224.0,
-            height=81.0
-        )
-
-        button_4 = Button(
-            background = 'red',
-            text = 'Gerenciar', 
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: print("button_4 clicked (gerenciar)"),
-            relief="flat"
-        )
-
-        button_4.place(  
-            x=28.0,
-            y=139.0,
-            width=224.0,
-            height=81.0
-        )
-
 
 
 # ----------- BOTÕES ----------- 
@@ -187,12 +168,11 @@ class Application():
             border=2,
             command=lambda: print("Adicionar")
         )
-
         self.btAdicionar.place(
             relx= 0.8, 
             rely=0.4, 
-            relwidth=0.1, 
-            relheight=0.1
+            width=180, 
+            height=61
         )
 
         
@@ -206,12 +186,11 @@ class Application():
             border=2,
             command=lambda: print("Excluir")
         )
-
         self.btExcluir.place(
             relx= 0.8, 
             rely=0.8, 
-            relwidth=0.1, 
-            relheight=0.1
+            width=180, 
+            height=61
         )
 
 
@@ -272,6 +251,25 @@ class Application():
             rely = 0.31,
             relwidth=0.4, 
             height=30
+        )
+
+        self.lbExcluir = Label(           # EXCLUIR
+            self.frame_principal, 
+            text="Excluir:", 
+            bg="#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"                     
+        )
+        self.lbExcluir.place(
+            relx = 0.05,
+            rely = 0.71
+        )
+        self.inputExcluir = Entry(self.frame_principal)
+        self.inputExcluir.place(
+            relx = 0.25,
+            rely = 0.71,
+            relwidth=0.4, 
+            height=30,
         )
 
 
