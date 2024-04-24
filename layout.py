@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 from PIL import ImageTk, Image
 import os
 
@@ -245,13 +246,20 @@ class Application():
             relx = 0.05,
             rely = 0.3
         )
-        self.inputSala = Entry(self.frame_principal)
-        self.inputSala.place(
-            relx = 0.25,
-            rely = 0.31,
-            relwidth=0.4, 
-            height=30
+
+        # LISTA SUSPENSA
+        numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
+        self.combobox = ttk.Combobox(
+            self.frame_principal, 
+            values=numeros, 
+            state="readonly", 
+            width=5
         )
+        self.combobox.place(
+            relx=0.25, 
+            rely = 0.3
+        )
+
 
         self.lbExcluir = Label(           # EXCLUIR
             self.frame_principal, 
