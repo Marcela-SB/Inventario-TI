@@ -89,6 +89,39 @@ class Application(tk.Tk):
 
 
 # ----------- ABAS MENU -----------
+    def id(self):
+        titulo = Label(
+            anchor="nw",
+            text="Inventário T.I. DEART",
+            fg= "#D9D9D9",
+            bg= "#29273A",
+            font=("Inter Black", 40 * -1, "bold")
+        )
+        titulo.place(
+            x= 12.0,
+            y= 36.0
+        )
+
+        # Carregar a imagem
+        imagem_path = os.path.join(os.path.dirname(__file__), "ufrn.png")
+        imagem = Image.open(imagem_path)
+        imagem = imagem.resize((187, 100), Image.ANTIALIAS)  # Largura x Altura
+        imagem = ImageTk.PhotoImage(imagem)
+
+        # Adicionar a imagem ao widget Label
+        self.label_imagem = Label(
+            self.root, 
+            image=imagem, 
+            bg="#29273A"
+        )
+        self.label_imagem.imagem = imagem  # Mantém uma referência para evitar que a imagem seja coletada pelo garbage collector
+        self.label_imagem.place(
+            relx=0.82, 
+            rely=0.01
+        )
+
+
+# ----------- ABAS MENU -----------
     def menu(self):
 
         aba_1 = Button( 
@@ -158,6 +191,7 @@ class Application(tk.Tk):
             height=81.0
         )
 
+        
     def abas_test(self):
         self.notebook = ttk.Notebook(self)
         self.notebook.place(
@@ -308,6 +342,25 @@ class Application(tk.Tk):
             rely = 0.71
         )
         self.inputExcluir = Entry(self.aba_gerenciar)
+        self.inputExcluir.place(
+            relx = 0.25,
+            rely = 0.71,
+            relwidth=0.4, 
+            height=30,
+        )
+
+        self.lbExcluir = Label(           # EXCLUIR
+            self.frame_principal, 
+            text="Excluir:", 
+            bg="#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"                     
+        )
+        self.lbExcluir.place(
+            relx = 0.05,
+            rely = 0.71
+        )
+        self.inputExcluir = Entry(self.frame_principal)
         self.inputExcluir.place(
             relx = 0.25,
             rely = 0.71,
