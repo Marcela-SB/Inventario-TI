@@ -10,12 +10,11 @@ class Application(tk.Tk):
     def __init__(self):
         super().__init__()
         self.tela()
-        self.frameDaTela()
+        '''self.frameDaTela()'''
         self.id()
         self.menu()
-        self.abas_test()
-        self.criandoBotoes()
-        self.objetos()
+        self.gerenciar()
+        self.buscar()
         self.mainloop()
 
 # ----------- JANELA -----------
@@ -28,7 +27,7 @@ class Application(tk.Tk):
         #self.minsize(width="", heigth="")  #TAMANHO MÍNIMO
         
 # ----------- FRAME PRINCIPAL -----------
-    def frameDaTela(self):
+    '''def frameDaTela(self):
         self.frame_principal = Frame(       # DETALHES DO FRAME PRINCIPAL
             self, 
             bd=4, 
@@ -41,19 +40,8 @@ class Application(tk.Tk):
             rely=0.205, 
             relwidth=0.98, 
             relheight=0.78
-        )
-
-        self.separator = Frame(         # CONTORNO DO FRAME PRINCIPAL
-            self.frame_principal, 
-            bg="#9B9B9B", 
-            height=2, 
-            bd=0
-         )
-        self.separator.place(
-            relx=0.01, 
-            rely=0.55, 
-            relwidth=0.98)        
-
+        )'''
+            
 
 # ----------- LOGO E NOME SISTEMA -----------
     def id(self):
@@ -89,145 +77,61 @@ class Application(tk.Tk):
 
 
 # ----------- ABAS MENU -----------
-    def id(self):
-        titulo = Label(
-            anchor="nw",
-            text="Inventário T.I. DEART",
-            fg= "#D9D9D9",
-            bg= "#29273A",
-            font=("Inter Black", 40 * -1, "bold")
-        )
-        titulo.place(
-            x= 12.0,
-            y= 36.0
-        )
-
-        # Carregar a imagem
-        imagem_path = os.path.join(os.path.dirname(__file__), "ufrn.png")
-        imagem = Image.open(imagem_path)
-        imagem = imagem.resize((187, 100), Image.ANTIALIAS)  # Largura x Altura
-        imagem = ImageTk.PhotoImage(imagem)
-
-        # Adicionar a imagem ao widget Label
-        self.label_imagem = Label(
-            self.root, 
-            image=imagem, 
-            bg="#29273A"
-        )
-        self.label_imagem.imagem = imagem  # Mantém uma referência para evitar que a imagem seja coletada pelo garbage collector
-        self.label_imagem.place(
-            relx=0.82, 
-            rely=0.01
-        )
-
-
-# ----------- ABAS MENU -----------
     def menu(self):
-
-        aba_1 = Button( 
-            bg="#D9D9D9",
-            text = 'Gerenciar', 
-            font= ("Inter Regular", 20 * -1),
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: print("aba_1 clicked (gerenciar)"),
-            relief="flat"
-        )
-
-        aba_1.place(  
-            x=28.0,
-            y=120.0, #139
-            width=224.0,
-            height=81.0
-
-        )
-
-        aba_2 = Button( 
-            bg="#D9D9D9",
-            text = 'Procurar',
-            font= ("Inter Regular", 20 * -1),
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: print("aba_2 clicked (procurar)"),
-            relief="flat"
-        )
-        aba_2.place(
-            x=287.0,
-            y=120.0,
-            width=224.0,
-            height=81.0
-        )
-
-        aba_3 = Button( 
-            bg="#D9D9D9",
-            text = 'Histórico',
-            font= ("Inter Regular", 20 * -1),
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: print("aba_3 clicked (histórico)"),
-            relief="flat"
-        )
-        aba_3.place(
-            x=546.0,
-            y=120.0,
-            width=224.0,
-            height=81.0
-        )
-
-
-        aba_4 = Button( 
-            bg="#D9D9D9",
-            text = 'Impressão',
-            font= ("Inter Regular", 20 * -1),
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: print("aba_4 clicked (impressão)"),
-            relief="flat"
-        )
-        aba_4.place(
-            x=805.0,
-            y=120.0,
-            width=224.0,
-            height=81.0
-        )
-
-        
-    def abas_test(self):
         self.notebook = ttk.Notebook(self)
         self.notebook.place(
             x=28.0,
             y=120.0,
             width=1150.0,
-            height=650.0
+            height=750.0
         )
 
-        # Create frames for each tab
+        # CRIANDO FRAMES PARA CADA ABA
         self.aba_gerenciar = tk.Frame(self.notebook, bg="#D9D9D9")
-        self.aba_procurar = tk.Frame(self.notebook, bg="#D9D9D9")
+        self.aba_buscar = tk.Frame(self.notebook, bg="#D9D9D9")
         self.aba_historico = tk.Frame(self.notebook, bg="#D9D9D9")
         self.aba_impressao = tk.Frame(self.notebook, bg="#D9D9D9")
 
         # Add frames to notebook (tab container)
         self.notebook.add(self.aba_gerenciar, text="Gerenciar")
-        self.notebook.add(self.aba_procurar, text="Procurar")
+        self.notebook.add(self.aba_buscar, text="Buscar")
         self.notebook.add(self.aba_historico, text="Histórico")
         self.notebook.add(self.aba_impressao, text="Impressão")
 
-        # Example content for tabs
-        tk.Label(self.aba_gerenciar, text="Gerenciar Conteúdo", bg="#D9D9D9").pack(pady=20)
-        tk.Label(self.aba_procurar, text="Procurar Conteúdo", bg="#D9D9D9").pack(pady=20)
+        # CONTEÚDOS DAS ABAS
+        tk.Label(self.aba_gerenciar, bg="#D9D9D9").pack(pady=20)
+        tk.Label(self.aba_buscar, text="Buscar Conteúdo", bg="#D9D9D9").pack(pady=20)
         tk.Label(self.aba_historico, text="Histórico Conteúdo", bg="#D9D9D9").pack(pady=20)
         tk.Label(self.aba_impressao, text="Impressão Conteúdo", bg="#D9D9D9").pack(pady=20)
 
         style = ttk.Style()
         # Configurando o estilo para as abas do notebook
-        style.configure('EstiloAbas.TNotebook.Tab', font=('Inter Regular', 20))
+        style.configure('EstiloAbas.TNotebook.Tab', font=('Inter Regular', 20), padding=[20, 10])
+
+        # Ajustando a largura e altura das abas (SELECIONADAS OU NÃO)
+        style.map('EstiloAbas.TNotebook.Tab', 
+              width=[('selected', 150), ('!selected', 100)], 
+              height=[('selected', 50), ('!selected', 45)])
 
         # Aplicando o estilo ao notebook
         self.notebook.configure(style='EstiloAbas.TNotebook')
 
-# ----------- BOTÕES ----------- 
-    def criandoBotoes(self):
+
+    def gerenciar(self):
+        
+        self.separator = Frame(         # SEPARADOR
+            self.aba_gerenciar, 
+            bg="#9B9B9B", 
+            height=2, 
+            bd=0
+         )
+        self.separator.place(
+            relx=0.01, 
+            rely=0.55, 
+            relwidth=0.98) 
+
+
+# ----------- BOTÕES -----------         
         self.btAdicionar = Button(
             self.aba_gerenciar,
             bg= "#2EC27B",
@@ -265,7 +169,7 @@ class Application(tk.Tk):
 
 
 # ----------- LABELS E INPUTS ----------- 
-    def objetos(self):
+    
         self.lbTombo = Label(           # TOMBO
             self.aba_gerenciar, 
             text="Tombo:", 
@@ -316,7 +220,7 @@ class Application(tk.Tk):
             rely = 0.3
         )
 
-        # LISTA SUSPENSA
+                                                # LISTA SUSPENSA
         numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
         self.combobox = ttk.Combobox(
             self.aba_gerenciar, 
@@ -349,24 +253,83 @@ class Application(tk.Tk):
             height=30,
         )
 
-        self.lbExcluir = Label(           # EXCLUIR
-            self.frame_principal, 
-            text="Excluir:", 
+
+    def buscar(self):
+        self.lbTombo = Label(           # TOMBO
+            self.aba_buscar, 
+            text="Tombo:", 
             bg="#D9D9D9",
             font=("Ivy 15 bold"), 
             fg= "black"                     
         )
-        self.lbExcluir.place(
+        self.lbTombo.place(
             relx = 0.05,
-            rely = 0.71
+            rely = 0.05
         )
-        self.inputExcluir = Entry(self.frame_principal)
-        self.inputExcluir.place(
+        self.inputTombo = Entry(self.aba_buscar)
+        self.inputTombo.place(
             relx = 0.25,
-            rely = 0.71,
+            rely = 0.06,
             relwidth=0.4, 
-            height=30,
+            height=30
         )
 
+# ----------- BOTÕES -----------         
+        self.btBuscar = Button(
+            self.aba_buscar,
+            bg= "#347deb",
+            fg= "#FFFFFF",
+            text="Buscar",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Buscar")
+        )
+        self.btBuscar.place(
+            relx= 0.8, 
+            rely=0.04, 
+            width=180, 
+            height=61
+        )
+
+# ----------- TABELA DE BUSCA -----------  
+        self.areaBusca = Frame(self.aba_buscar, bg="#D9D9D9")
+        self.areaBusca.place(
+            relx= 0.02, 
+            rely=0.205, 
+            relwidth=0.95, 
+            relheight=0.78
+        )
+
+        # COLUNAS
+        self.lista = ttk.Treeview(
+            self.areaBusca,
+            height = 3,
+            column=("col1", "col2", "col3")
+        )
+        self.lista.heading("#1", text="TOMBO")
+        self.lista.heading("#2", text="ITEM")
+        self.lista.heading("#3", text="LOCALIZAÇÃO")
+
+        self.lista.column("#0", width=0, stretch=tk.NO)
+
+        self.lista.place(
+            relx= 0.0, 
+            rely=0.0, 
+            relwidth=0.98, 
+            relheight=1
+        )
+
+        self.scroolLista = Scrollbar(
+            self.areaBusca,
+            orient="vertical"
+        )
+        self.lista.configure(yscrollcommand= self.scroolLista.set)
+        self.scroolLista.place(
+            relx=0.98,
+            rely=0.00001, 
+            relwidth=0.02, 
+            relheight=1
+        )
 
 Application()
