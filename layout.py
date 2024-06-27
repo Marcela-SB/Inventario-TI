@@ -117,7 +117,7 @@ class Application(tk.Tk):
         tk.Label(self.aba_gerenciar, bg="#D9D9D9").pack(pady=20)
         tk.Label(self.aba_buscar, bg="#D9D9D9").pack(pady=20)
         tk.Label(self.aba_historico, bg="#D9D9D9").pack(pady=20)
-        tk.Label(self.aba_imprimir, text="Impressão Conteúdo", bg="#D9D9D9").pack(pady=20)
+        tk.Label(self.aba_imprimir, bg="#D9D9D9").pack(pady=20)
 
         style = ttk.Style()
         # Configurando o estilo para as abas do notebook
@@ -132,6 +132,7 @@ class Application(tk.Tk):
         self.notebook.configure(style='EstiloAbas.TNotebook')
 
 
+#/////////////////////////////////////////////////
     def gerenciar(self):
         
         self.separator = Frame(         # SEPARADOR
@@ -410,6 +411,7 @@ class Application(tk.Tk):
             orient="vertical"
         )
         self.lista.configure(yscrollcommand= self.scroolLista.set)
+        self.scroolLista.config(command=self.lista.yview)
         self.scroolLista.place(
             relx=0.98,
             rely=0.00001, 
@@ -497,7 +499,7 @@ class Application(tk.Tk):
         self.entradas.heading("#3", text="DESTINO")
         self.entradas.heading("#4", text="RESPONSÁVEL")
 
-        self.entradas.column("#0", width=0)
+        self.entradas.column("#0", width=0, stretch=tk.NO)
 
         self.entradas.place(
             relx= 0.0, 
@@ -511,6 +513,7 @@ class Application(tk.Tk):
             orient="vertical"
         )
         self.entradas.configure(yscrollcommand= self.scroolEntradas.set)
+        self.scroolEntradas.config(command=self.entradas.yview)
         self.scroolEntradas.place(
             relx=0.98,
             rely=0.00001, 
@@ -520,22 +523,103 @@ class Application(tk.Tk):
 
     
     def imprimir(self):
-# ----------- BOTÕES -----------        
-        self.btImprimir = Button(
+# ----------- LABELS E INPUTS ----------- 
+        self.legenda = Label(
+            self.aba_imprimir, 
+            text="Selecione o que deseja imprimir do item acima:", 
+            bg="#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"                     
+        )
+        self.legenda.place(
+            relx = 0.05,
+            rely = 0.5
+        )
+
+
+        self.lbTombo = Label(           # TOMBO
+            self.aba_imprimir, 
+            text="Tombo:", 
+            bg="#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"                     
+        )
+        self.lbTombo.place(
+            relx = 0.05,
+            rely = 0.05
+        )
+        self.inputTombo = Entry(self.aba_imprimir, font=50)
+        self.inputTombo.place(
+            relx = 0.25,
+            rely = 0.05,
+            relwidth=0.4, 
+            height=30
+        )
+
+# ----------- BOTÕES -----------
+        self.btQRCode = Button(
             self.aba_imprimir,
             bg= "#cc6d2d",
             fg= "#FFFFFF",
-            text="Imprimir",
+            text="QR Code",
             font=("Inter Regular", 24 * -1),
             relief="flat", 
             border=2,
             command=lambda: print("Imprimir")
         )
-        self.btImprimir.place(
+        self.btQRCode.place(
+            relx= 0.5, 
+            rely=0.8, 
+            width=180, 
+            height=61
+        )
+
+        self.btImpHist = Button(
+            self.aba_imprimir,
+            bg= "#cc6d2d",
+            fg= "#FFFFFF",
+            text="Histórico",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Imprimir")
+        )
+        self.btImpHist.place(
             relx= 0.8, 
             rely=0.8, 
             width=180, 
             height=61
+        )
+
+# ----------- CONFERIR ITEM -----------  
+        # "DIV"
+        self.areaConferir = Frame(self.aba_imprimir, bg="#D9D9D9")
+        self.areaConferir.place(
+            relx= 0.02, 
+            rely=0.3, 
+            relwidth=0.95, 
+            relheight=0.1
+        )
+
+        # COLUNAS
+        self.conferindo = ttk.Treeview(
+            self.areaConferir,
+            height = 3,
+            column=("col1", "col2", "col3", "col4", "col5")
+        )
+        self.conferindo.heading("#1", text="TOMBO")
+        self.conferindo.heading("#2", text="ITEM")
+        self.conferindo.heading("#3", text="DETALHAMENTO")
+        self.conferindo.heading("#4", text="LOCALIZAÇÃO")
+        self.conferindo.heading("#5", text="STATUS")
+
+        self.conferindo.column("#0", width=0, stretch=tk.NO)
+
+        self.conferindo.place(
+            relx= 0.0, 
+            rely=0.0, 
+            relwidth=1, 
+            relheight=1
         )
 
 Application()
