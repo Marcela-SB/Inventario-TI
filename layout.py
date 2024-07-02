@@ -17,6 +17,7 @@ class Application(tk.Tk):
         self.buscar()
         self.historico()
         self.imprimir()
+        #self.checkbox()
         self.mainloop()
 
 # ----------- JANELA -----------
@@ -73,7 +74,7 @@ class Application(tk.Tk):
 
 
         # Carregar a imagem
-        imagem_path = os.path.join(os.path.dirname(__file__), "ufrn.png")
+        imagem_path = os.path.join(os.path.dirname(__file__), "imagens/ufrn.png")
         imagem = Image.open(imagem_path)
         imagem = imagem.resize((187, 100), Image.ANTIALIAS)  # Largura x Altura
         imagem = ImageTk.PhotoImage(imagem)
@@ -135,15 +136,26 @@ class Application(tk.Tk):
 #/////////////////////////////////////////////////
     def gerenciar(self):
         
-        self.separator = Frame(         # SEPARADOR
+        self.separator1 = Frame(         # SEPARADOR 1
             self.aba_gerenciar, 
             bg="#9B9B9B", 
             height=2, 
             bd=0
          )
-        self.separator.place(
+        self.separator1.place(
             relx=0.01, 
-            rely=0.55, 
+            rely=0.45, 
+            relwidth=0.98) 
+        
+        self.separator2 = Frame(         # SEPARADOR 2
+            self.aba_gerenciar, 
+            bg="#9B9B9B", 
+            height=2, 
+            bd=0
+         )
+        self.separator2.place(
+            relx=0.01, 
+            rely=0.75, 
             relwidth=0.98) 
 
 
@@ -160,11 +172,10 @@ class Application(tk.Tk):
         )
         self.btAdicionar.place(
             relx= 0.8, 
-            rely=0.4, 
+            rely=0.3, 
             width=180, 
             height=61
         )
-
         
         self.btExcluir = Button(
             self.aba_gerenciar,
@@ -178,9 +189,26 @@ class Application(tk.Tk):
         )
         self.btExcluir.place(
             relx= 0.8, 
-            rely=0.8, 
+            rely=0.55, 
             width=180, 
             height=61
+        )
+
+        self.btCompInventarios = Button(
+            self.aba_gerenciar,
+            bg= "black",
+            fg= "#FFFFFF",
+            text="Comparar\nInventários",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Comparar Inventários")
+        )
+        self.btCompInventarios.place(
+            relx= 0.8, 
+            rely=0.82, 
+            width=180, 
+            height=70
         )
 
 
@@ -226,7 +254,7 @@ class Application(tk.Tk):
 
         self.lbDescricao = Label(           # DESCRIÇÃO
             self.aba_gerenciar, 
-            text="Descricao:", 
+            text="Descrição:", 
             bg="#D9D9D9",
             font=("Ivy 15 bold"), 
             fg= "black"                     
@@ -281,15 +309,62 @@ class Application(tk.Tk):
         )
         self.lbExcluir.place(
             relx = 0.05,
-            rely = 0.71
+            rely = 0.58
         )
         self.inputExcluir = Entry(self.aba_gerenciar, font=50)
         self.inputExcluir.place(
             relx = 0.25,
-            rely = 0.71,
+            rely = 0.58,
             relwidth=0.4, 
             height=30,
         )
+
+
+# ----------- COMPARAÇÃO INVENTÁRIOS ----------- 
+        self.lbComp = Label(
+            self.aba_gerenciar, 
+            text="Comparar                                                    com", 
+            bg="#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"                     
+        )
+        self.lbComp.place(
+            relx = 0.05,
+            rely = 0.85
+        )
+        
+                                                  # LISTA SUSPENSA
+        backups = [str(i) for i in range(1, 6)]  # Lista de números de 1 a 5
+        self.combobox = ttk.Combobox(
+            self.aba_gerenciar, 
+            values=backups, 
+            font=50,
+            state="readonly", 
+            width=15
+        )
+        self.combobox.place(
+            relx=0.2, 
+            rely = 0.85
+        )
+        style = ttk.Style()
+        style.configure('TCombobox', padding=(10, 5, 10, 5), arrowsize=15)
+
+
+                                                          # LISTA SUSPENSA
+        backups = [str(i) for i in range(1, 6)]  # Lista de números de 1 a 5
+        self.combobox = ttk.Combobox(
+            self.aba_gerenciar, 
+            values=backups, 
+            font=50,
+            state="readonly", 
+            width=15
+        )
+        self.combobox.place(
+            relx=0.5, 
+            rely = 0.85
+        )
+        style = ttk.Style()
+        style.configure('TCombobox', padding=(10, 5, 10, 5), arrowsize=15)
 
 
     def buscar(self):
@@ -375,6 +450,23 @@ class Application(tk.Tk):
             height=61
         )
 
+        self.btInvntCompleto = Button(
+            self.aba_buscar,
+            bg= "purple",
+            fg= "#FFFFFF",
+            text="Inventário\nCompleto",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Exibir Inventário Completo")
+        )
+        self.btInvntCompleto.place(
+            relx= 0.8, 
+            rely=0.15, 
+            width=180, 
+            height=61
+        )
+
 # ----------- TABELA DE BUSCA -----------  
         # "DIV"
         self.areaBusca = Frame(self.aba_buscar, bg="#D9D9D9")
@@ -450,7 +542,7 @@ class Application(tk.Tk):
             font=("Inter Regular", 24 * -1),
             relief="flat", 
             border=2,
-            command=lambda: print("Novo")
+            command= self.criarNovoHistorico
         )
         self.btNovo.place(
             relx= 0.8, 
@@ -521,12 +613,172 @@ class Application(tk.Tk):
             relheight=1
         )
 
-    
-    def imprimir(self):
+    def criarNovoHistorico(self):
+        self.janelinha = Toplevel()
+        self.janelinha.title("Novo Histórico")
+        self.janelinha.configure(bg= "#29273A")
+        self.janelinha.geometry("500x400") # Largura x Altura
+        self.janelinha.resizable(False, False)          #RESPONSIVIDADE
+        self.janelinha.focus_force()
+        self.janelinha.grab_set()
+
+        self.novoHist = Frame(
+            self.janelinha,
+            bg= "#D9D9D9"
+        )
+        self.novoHist.place(
+            relx= 0.05,
+            rely= 0.05,
+            relwidth= 0.9,
+            relheight= 0.9
+        )
+
+# ----------- BOTÕES ----------- 
+        self.btNovoHist = Button(
+            self.novoHist,
+            bg= "#2EC27B",
+            fg= "#FFFFFF",
+            text="Criar",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2
+        )
+        self.btNovoHist.place(
+            relx= 0.6, 
+            rely=0.815, 
+            width=100, 
+            height=45
+        )
+        
+        self.btCancelarHist = Button(
+            self.novoHist,
+            bg= "#C22E2E",
+            fg= "#FFFFFF",
+            text="Cancelar",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command= self.janelinha.destroy
+
+        )
+        self.btCancelarHist.place(
+            relx= 0.2, 
+            rely=0.815, 
+            width=100, 
+            height=45
+        )
+
+
+# ----------- LABELS E INPUTS ----------- 
+        self.histTombo = Label(
+            self.novoHist,
+            text="Tombo:",
+            bg= "#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"   
+        )
+        self.histTombo.place(
+            relx= 0.125,
+            rely= 0.075
+        )
+        self.inputTombo = Entry(self.novoHist, font=50)
+        self.inputTombo.place(
+            relx=0.5,
+            rely = 0.075,
+            relwidth=0.4, 
+            height=30
+        )
+
+
+        self.origem = Label(
+            self.novoHist,
+            text="Origem:",
+            bg= "#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"   
+        )
+        self.origem.place(
+            relx= 0.15,
+            rely= 0.25
+        )
+        numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
+        self.selOrigem = ttk.Combobox(
+            self.novoHist, 
+            values=numeros, 
+            state="readonly", 
+            width=10,
+        )
+        self.selOrigem.place(
+            relx=0.5, 
+            rely = 0.25
+        )
+
+
+        self.destino = Label(
+            self.novoHist,
+            text="Destino:",
+            bg= "#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"   
+        )
+        self.destino.place(
+            relx= 0.15,
+            rely= 0.45
+        )
+        numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
+        self.selDestino = ttk.Combobox(
+            self.novoHist, 
+            values=numeros, 
+            state="readonly", 
+            width=10,
+        )
+        self.selDestino.place(
+            relx=0.5, 
+            rely = 0.45
+        )
+
+
+        self.histRespons = Label(
+            self.novoHist,
+            text="Responsável:",
+            bg= "#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"   
+        )
+        self.histRespons.place(
+            relx= 0.125,
+            rely= 0.65
+        )        
+        responsaveis = ["Eu", "Tú", "Ele"]  # Lista de responsáveis
+        self.selDestino = ttk.Combobox(
+            self.novoHist, 
+            values=responsaveis, 
+            state="readonly", 
+            width=10,
+        )
+        self.selDestino.place(
+            relx=0.5, 
+            rely = 0.65
+        )
+
+
+    def imprimir(self):       
+        self.separator = Frame(         # SEPARADOR
+            self.aba_imprimir, 
+            bg="#9B9B9B", 
+            width=2, 
+            bd=0
+         )
+        self.separator.place(
+            relx=0.7, 
+            rely=0.45, 
+            relheight=0.5) 
+
+
 # ----------- LABELS E INPUTS ----------- 
         self.legenda = Label(
             self.aba_imprimir, 
-            text="Selecione o que deseja imprimir do item acima:", 
+            text="Selecione o que deseja imprimir do item acima: (necessita do TOMBO)", 
             bg="#D9D9D9",
             font=("Ivy 15 bold"), 
             fg= "black"                     
@@ -536,6 +788,29 @@ class Application(tk.Tk):
             rely = 0.5
         )
 
+        self.extras = Label(
+            self.aba_imprimir, 
+            text="Extras:", 
+            bg="#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"                     
+        )
+        self.extras.place(
+            relx = 0.75,
+            rely = 0.5
+        )
+
+        self.conferir = Label(
+            self.aba_imprimir, 
+            text="Confira o item inserido acima:", 
+            bg="#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"                     
+        )
+        self.conferir.place(
+            relx = 0.05,
+            rely = 0.2
+        )
 
         self.lbTombo = Label(           # TOMBO
             self.aba_imprimir, 
@@ -565,10 +840,27 @@ class Application(tk.Tk):
             font=("Inter Regular", 24 * -1),
             relief="flat", 
             border=2,
-            command=lambda: print("Imprimir")
+            command=lambda: print("QR Code")
         )
         self.btQRCode.place(
-            relx= 0.5, 
+            relx= 0.15, 
+            rely=0.8, 
+            width=180, 
+            height=61
+        )
+
+        self.btCodigoBarras = Button(
+            self.aba_imprimir,
+            bg= "#cc6d2d",
+            fg= "#FFFFFF",
+            text="Cód. de Barras",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Detalhes")
+        )
+        self.btCodigoBarras.place(
+            relx= 0.4, 
             rely=0.8, 
             width=180, 
             height=61
@@ -582,13 +874,47 @@ class Application(tk.Tk):
             font=("Inter Regular", 24 * -1),
             relief="flat", 
             border=2,
-            command=lambda: print("Imprimir")
+            command=lambda: print("Histórico")
         )
         self.btImpHist.place(
-            relx= 0.8, 
-            rely=0.8, 
+            relx= 0.15, 
+            rely=0.65, 
             width=180, 
             height=61
+        )
+
+        self.btImpDetal = Button(
+            self.aba_imprimir,
+            bg= "#cc6d2d",
+            fg= "#FFFFFF",
+            text="Detalhes Item",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Detalhes")
+        )
+        self.btImpDetal.place(
+            relx= 0.4, 
+            rely=0.65, 
+            width=180, 
+            height=61
+        )
+
+        self.btInventario = Button(
+            self.aba_imprimir,
+            bg= "#cc6d2d",
+            fg= "#FFFFFF",
+            text="Imprimir\nInventário\nCompleto",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Imprimir")
+        )
+        self.btInventario.place(
+            relx= 0.8, 
+            rely=0.7, 
+            width=180, 
+            height=101
         )
 
 # ----------- CONFERIR ITEM -----------  
@@ -596,7 +922,7 @@ class Application(tk.Tk):
         self.areaConferir = Frame(self.aba_imprimir, bg="#D9D9D9")
         self.areaConferir.place(
             relx= 0.02, 
-            rely=0.3, 
+            rely=0.25, 
             relwidth=0.95, 
             relheight=0.1
         )
@@ -621,5 +947,75 @@ class Application(tk.Tk):
             relwidth=1, 
             relheight=1
         )
+
+    
+    """def checkbox(self):
+        self.checkInfo = ttk.Button(
+            self.aba_imprimir, 
+            text="Informações Item", 
+            style="Custom.TButton",
+            command=self.on_button_click
+        )
+        self.checkInfo.pack(pady=40)    
+
+        '''self.checkInfo = Button(
+            self.aba_imprimir,
+            text="Informações Item",
+            bg="red",
+            fg= "#FFFFFF",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Info")
+        )
+        self.checkInfo.place(
+            relx= 0.5,
+            rely= 0.8
+        )'''
+
+        self.button_toggled = False
+        
+        # Cria uma instância de ttk.Style
+        style = ttk.Style(self)
+        
+        # Define estilo para o estado normal do botão
+        style.configure(
+            "Custom.TButton",
+            font=("Inter Regular", 18 * -1),
+            foreground="red",
+            background="yellow",
+            padding=10
+        )
+        
+        # Define estilo para o estado pressionado do botão
+        style.map(
+            "Custom.TButton",
+            foreground=[("pressed", "white"), ("active", "white")],
+            background=[("pressed", "#005F8C"), ("active", "#005F8C")]
+        )
+
+        # Define estilo para o botão alternado
+        style.configure(
+            "Toggled.TButton",
+            font=("Arial", 14),
+            foreground="blue",
+            background="pink",  # Cor diferente para o estado alternado
+            padding=10
+        )
+        
+        # Adiciona um botão com o estilo personalizado
+        
+    
+    def on_button_click(self):
+        # Alterna o estado do botão
+        self.button_toggled = not self.button_toggled
+        
+        # Altera o estilo do botão baseado no estado
+        if self.button_toggled:
+            self.checkInfo.configure(style="Toggled.TButton")
+        else:
+            self.checkInfo.configure(style="Custom.TButton")
+        
+        print("Botão clicado! Estado:", self.button_toggled)"""
 
 Application()
