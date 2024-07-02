@@ -136,15 +136,26 @@ class Application(tk.Tk):
 #/////////////////////////////////////////////////
     def gerenciar(self):
         
-        self.separator = Frame(         # SEPARADOR
+        self.separator1 = Frame(         # SEPARADOR 1
             self.aba_gerenciar, 
             bg="#9B9B9B", 
             height=2, 
             bd=0
          )
-        self.separator.place(
+        self.separator1.place(
             relx=0.01, 
-            rely=0.55, 
+            rely=0.45, 
+            relwidth=0.98) 
+        
+        self.separator2 = Frame(         # SEPARADOR 2
+            self.aba_gerenciar, 
+            bg="#9B9B9B", 
+            height=2, 
+            bd=0
+         )
+        self.separator2.place(
+            relx=0.01, 
+            rely=0.75, 
             relwidth=0.98) 
 
 
@@ -161,11 +172,10 @@ class Application(tk.Tk):
         )
         self.btAdicionar.place(
             relx= 0.8, 
-            rely=0.4, 
+            rely=0.3, 
             width=180, 
             height=61
         )
-
         
         self.btExcluir = Button(
             self.aba_gerenciar,
@@ -179,9 +189,26 @@ class Application(tk.Tk):
         )
         self.btExcluir.place(
             relx= 0.8, 
-            rely=0.8, 
+            rely=0.55, 
             width=180, 
             height=61
+        )
+
+        self.btCompInventarios = Button(
+            self.aba_gerenciar,
+            bg= "black",
+            fg= "#FFFFFF",
+            text="Comparar\nInventários",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Comparar Inventários")
+        )
+        self.btCompInventarios.place(
+            relx= 0.8, 
+            rely=0.82, 
+            width=180, 
+            height=70
         )
 
 
@@ -227,7 +254,7 @@ class Application(tk.Tk):
 
         self.lbDescricao = Label(           # DESCRIÇÃO
             self.aba_gerenciar, 
-            text="Descricao:", 
+            text="Descrição:", 
             bg="#D9D9D9",
             font=("Ivy 15 bold"), 
             fg= "black"                     
@@ -282,15 +309,62 @@ class Application(tk.Tk):
         )
         self.lbExcluir.place(
             relx = 0.05,
-            rely = 0.71
+            rely = 0.58
         )
         self.inputExcluir = Entry(self.aba_gerenciar, font=50)
         self.inputExcluir.place(
             relx = 0.25,
-            rely = 0.71,
+            rely = 0.58,
             relwidth=0.4, 
             height=30,
         )
+
+
+# ----------- COMPARAÇÃO INVENTÁRIOS ----------- 
+        self.lbComp = Label(
+            self.aba_gerenciar, 
+            text="Comparar                                                    com", 
+            bg="#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"                     
+        )
+        self.lbComp.place(
+            relx = 0.05,
+            rely = 0.85
+        )
+        
+                                                  # LISTA SUSPENSA
+        backups = [str(i) for i in range(1, 6)]  # Lista de números de 1 a 5
+        self.combobox = ttk.Combobox(
+            self.aba_gerenciar, 
+            values=backups, 
+            font=50,
+            state="readonly", 
+            width=15
+        )
+        self.combobox.place(
+            relx=0.2, 
+            rely = 0.85
+        )
+        style = ttk.Style()
+        style.configure('TCombobox', padding=(10, 5, 10, 5), arrowsize=15)
+
+
+                                                          # LISTA SUSPENSA
+        backups = [str(i) for i in range(1, 6)]  # Lista de números de 1 a 5
+        self.combobox = ttk.Combobox(
+            self.aba_gerenciar, 
+            values=backups, 
+            font=50,
+            state="readonly", 
+            width=15
+        )
+        self.combobox.place(
+            relx=0.5, 
+            rely = 0.85
+        )
+        style = ttk.Style()
+        style.configure('TCombobox', padding=(10, 5, 10, 5), arrowsize=15)
 
 
     def buscar(self):
@@ -372,6 +446,23 @@ class Application(tk.Tk):
         self.btBuscar.place(
             relx= 0.8, 
             rely=0.04, 
+            width=180, 
+            height=61
+        )
+
+        self.btInvntCompleto = Button(
+            self.aba_buscar,
+            bg= "purple",
+            fg= "#FFFFFF",
+            text="Inventário\nCompleto",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: print("Exibir Inventário Completo")
+        )
+        self.btInvntCompleto.place(
+            relx= 0.8, 
+            rely=0.15, 
             width=180, 
             height=61
         )
@@ -542,6 +633,42 @@ class Application(tk.Tk):
             relheight= 0.9
         )
 
+# ----------- BOTÕES ----------- 
+        self.btNovoHist = Button(
+            self.novoHist,
+            bg= "#2EC27B",
+            fg= "#FFFFFF",
+            text="Criar",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2
+        )
+        self.btNovoHist.place(
+            relx= 0.6, 
+            rely=0.815, 
+            width=100, 
+            height=45
+        )
+        
+        self.btCancelarHist = Button(
+            self.novoHist,
+            bg= "#C22E2E",
+            fg= "#FFFFFF",
+            text="Cancelar",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command= self.janelinha.destroy
+
+        )
+        self.btCancelarHist.place(
+            relx= 0.2, 
+            rely=0.815, 
+            width=100, 
+            height=45
+        )
+
+
 # ----------- LABELS E INPUTS ----------- 
         self.histTombo = Label(
             self.novoHist,
@@ -552,12 +679,12 @@ class Application(tk.Tk):
         )
         self.histTombo.place(
             relx= 0.125,
-            rely= 0.1
+            rely= 0.075
         )
         self.inputTombo = Entry(self.novoHist, font=50)
         self.inputTombo.place(
             relx=0.5,
-            rely = 0.1,
+            rely = 0.075,
             relwidth=0.4, 
             height=30
         )
@@ -572,7 +699,7 @@ class Application(tk.Tk):
         )
         self.origem.place(
             relx= 0.15,
-            rely= 0.3
+            rely= 0.25
         )
         numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
         self.selOrigem = ttk.Combobox(
@@ -583,7 +710,7 @@ class Application(tk.Tk):
         )
         self.selOrigem.place(
             relx=0.5, 
-            rely = 0.3
+            rely = 0.25
         )
 
 
@@ -596,7 +723,7 @@ class Application(tk.Tk):
         )
         self.destino.place(
             relx= 0.15,
-            rely= 0.5
+            rely= 0.45
         )
         numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
         self.selDestino = ttk.Combobox(
@@ -607,7 +734,7 @@ class Application(tk.Tk):
         )
         self.selDestino.place(
             relx=0.5, 
-            rely = 0.5
+            rely = 0.45
         )
 
 
@@ -620,7 +747,7 @@ class Application(tk.Tk):
         )
         self.histRespons.place(
             relx= 0.125,
-            rely= 0.7
+            rely= 0.65
         )        
         responsaveis = ["Eu", "Tú", "Ele"]  # Lista de responsáveis
         self.selDestino = ttk.Combobox(
@@ -631,12 +758,8 @@ class Application(tk.Tk):
         )
         self.selDestino.place(
             relx=0.5, 
-            rely = 0.7
+            rely = 0.65
         )
-
-
-
-
 
 
     def imprimir(self):       
@@ -655,7 +778,7 @@ class Application(tk.Tk):
 # ----------- LABELS E INPUTS ----------- 
         self.legenda = Label(
             self.aba_imprimir, 
-            text="Selecione o que deseja imprimir do item acima:", 
+            text="Selecione o que deseja imprimir do item acima: (necessita do TOMBO)", 
             bg="#D9D9D9",
             font=("Ivy 15 bold"), 
             fg= "black"                     
