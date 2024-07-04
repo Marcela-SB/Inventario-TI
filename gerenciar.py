@@ -1,4 +1,5 @@
 from modulos import *
+from funcGeren import *
 
 def gerenciar(self):
     
@@ -34,7 +35,7 @@ def gerenciar(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("Adicionar")
+        command=lambda: funcBtAdicionar(self)
     )
     self.btAdicionar.place(
         relx= 0.8, 
@@ -51,7 +52,7 @@ def gerenciar(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("Excluir")
+        command= lambda: funcBtExcluir(self)
     )
     self.btExcluir.place(
         relx= 0.8, 
@@ -68,7 +69,7 @@ def gerenciar(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("Salvar Inventário Atual")
+        command=lambda: funcBtSalvarInventario(self)
     )
     self.btSalvarInventario.place(
         relx= 0.8, 
@@ -85,7 +86,7 @@ def gerenciar(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("Comparar Inventários")
+        command=lambda: funcBtCompInventarios(self)
     )
     self.btCompInventarios.place(
         relx= 0.8, 
@@ -97,85 +98,88 @@ def gerenciar(self):
 
 # ----------- LABELS E INPUTS ----------- 
 
-    self.lbTombo = Label(           # TOMBO
+    self.lbTomboGer = Label(           # TOMBO
         self.aba_gerenciar, 
         text="Tombo:", 
         bg="#D9D9D9",
         font=("Ivy 15 bold"), 
         fg= "black"                     
     )
-    self.lbTombo.place(
+    self.lbTomboGer.place(
         relx = 0.05,
         rely = 0.05
     )
-    self.inputTombo = Entry(self.aba_gerenciar, font=50)
-    self.inputTombo.place(
+    self.inputTomboGer = Entry(self.aba_gerenciar, font=50)
+    self.inputTomboGer.place(
         relx = 0.25,
         rely = 0.05,
         relwidth=0.4, 
         height=30
     )
 
-    self.lbItem = Label(           # ITEM
+    self.lbItemGer = Label(           # ITEM
         self.aba_gerenciar, 
         text="Item:", 
         bg="#D9D9D9",
         font=("Ivy 15 bold"), 
         fg= "black"                     
     )
-    self.lbItem.place(
+    self.lbItemGer.place(
         relx = 0.05,
         rely = 0.125
     )
-    self.inputItem = Entry(self.aba_gerenciar, font=50)
-    self.inputItem.place(
+    self.inputItemGer = Entry(self.aba_gerenciar, font=50)
+    self.inputItemGer.place(
         relx = 0.25,
         rely = 0.127,
         relwidth=0.4, 
         height=30
     )
 
-    self.lbDescricao = Label(           # DESCRIÇÃO
+    self.lbDescricaoGer = Label(           # DESCRIÇÃO
         self.aba_gerenciar, 
         text="Descrição:", 
         bg="#D9D9D9",
         font=("Ivy 15 bold"), 
         fg= "black"                     
     )
-    self.lbDescricao.place(
+    self.lbDescricaoGer.place(
         relx = 0.05,
         rely = 0.21
     )
-    self.inputDescricao = Entry(self.aba_gerenciar, font=50)
-    self.inputDescricao.place(
+    self.inputDescricaoGer = Entry(self.aba_gerenciar, font=50)
+    self.inputDescricaoGer.place(
         relx = 0.25,
         rely = 0.21,
         relwidth=0.4, 
         height=30
     )
 
-    self.lbSala = Label(           # SALA
+    self.valor_combobox = tk.StringVar()
+
+    self.lbSalaGer = Label(           # SALA
         self.aba_gerenciar, 
         text="Sala:", 
         bg="#D9D9D9",
         font=("Ivy 15 bold"), 
         fg= "black"                     
     )
-    self.lbSala.place(
+    self.lbSalaGer.place(
         relx = 0.05,
         rely = 0.3
     )
 
                                               # LISTA SUSPENSA
     numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
-    self.combobox = ttk.Combobox(
+    self.comboboxGer = ttk.Combobox(
         self.aba_gerenciar, 
+        textvariable=self.valor_combobox,
         values=numeros, 
         font=50,
         state="readonly", 
         width=10
     )
-    self.combobox.place(
+    self.comboboxGer.place(
         relx=0.25, 
         rely = 0.31
     )
@@ -185,28 +189,28 @@ def gerenciar(self):
 
 
 # ----------- COMPARAÇÃO INVENTÁRIOS ----------- 
-    self.lbComp = Label(
+    self.lbCompGer = Label(
         self.aba_gerenciar, 
         text="Comparar                                                    com", 
         bg="#D9D9D9",
         font=("Ivy 15 bold"), 
         fg= "black"                     
     )
-    self.lbComp.place(
+    self.lbCompGer.place(
         relx = 0.05,
         rely = 0.85
     )
     
                                               # LISTA SUSPENSA
     backups = [str(i) for i in range(1, 6)]  # Lista de números de 1 a 5
-    self.combobox = ttk.Combobox(
+    self.comboboxBack1 = ttk.Combobox(
         self.aba_gerenciar, 
         values=backups, 
         font=50,
         state="readonly", 
         width=15
     )
-    self.combobox.place(
+    self.comboboxBack1.place(
         relx=0.2, 
         rely = 0.85
     )
@@ -216,14 +220,14 @@ def gerenciar(self):
 
                                                       # LISTA SUSPENSA
     backups = [str(i) for i in range(1, 6)]  # Lista de números de 1 a 5
-    self.combobox = ttk.Combobox(
+    self.comboboxBack2 = ttk.Combobox(
         self.aba_gerenciar, 
         values=backups, 
         font=50,
         state="readonly", 
         width=15
     )
-    self.combobox.place(
+    self.comboboxBack2.place(
         relx=0.5, 
         rely = 0.85
     )
