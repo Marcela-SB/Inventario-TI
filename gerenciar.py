@@ -1,5 +1,5 @@
 from modulos import *
-from funcGeren import *
+from funcoes.funcGeren import *
 
 def gerenciar(self):
     
