@@ -1,72 +1,73 @@
 from modulos import *
+from funcoes.funcBusc import *
 
 def buscar(self):
 # ----------- LABELS E INPUTS ----------- 
-    self.lbTombo = Label(           # TOMBO
+    self.lbTomboBusc = Label(           # TOMBO
         self.aba_buscar, 
         text="Tombo:", 
         bg="#D9D9D9",
         font=("Ivy 15 bold"), 
         fg= "black"                     
     )
-    self.lbTombo.place(
+    self.lbTomboBusc.place(
         relx = 0.05,
         rely = 0.05
     )
-    self.inputTombo = Entry(self.aba_buscar, font=50)
-    self.inputTombo.place(
+    self.inputTomboBusc = Entry(self.aba_buscar, font=50)
+    self.inputTomboBusc.place(
         relx = 0.25,
         rely = 0.06,
         relwidth=0.4, 
         height=30
     )
 
-    self.lbItem = Label(           # ITEM
+    self.lbItemBusc = Label(           # ITEM
         self.aba_buscar, 
         text="Item:", 
         bg="#D9D9D9",
         font=("Ivy 15 bold"), 
         fg= "black"                     
     )
-    self.lbItem.place(
+    self.lbItemBusc.place(
         relx = 0.05,
         rely = 0.125
     )
-    self.inputItem = Entry(self.aba_buscar, font=50)
-    self.inputItem.place(
+    self.inputItemBusc = Entry(self.aba_buscar, font=50)
+    self.inputItemBusc.place(
         relx = 0.25,
         rely = 0.127,
         relwidth=0.4, 
         height=30
     )
 
-    self.lbSala = Label(           # SALA
+    self.lbSalaBusc = Label(           # SALA
         self.aba_buscar, 
         text="Sala:", 
         bg="#D9D9D9",
         font=("Ivy 15 bold"), 
         fg= "black"                     
     )
-    self.lbSala.place(
+    self.lbSalaBusc.place(
         relx = 0.05,
         rely = 0.21
     )
 
                                             # LISTA SUSPENSA
     numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
-    self.combobox = ttk.Combobox(
+    self.comboboxBusc = ttk.Combobox(
         self.aba_buscar, 
         values=numeros, 
         state="readonly", 
         width=10,
     )
-    self.combobox.place(
+    self.comboboxBusc.place(
         relx=0.25, 
         rely = 0.21
     )
 
 # ----------- BOTÕES -----------         
-    self.btBuscar = Button(
+    self.btBuscarBusc = Button(
         self.aba_buscar,
         bg= "#347deb",
         fg= "#FFFFFF",
@@ -74,16 +75,16 @@ def buscar(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("Buscar")
+        command=lambda: funcBtBuscar(self)
     )
-    self.btBuscar.place(
+    self.btBuscarBusc.place(
         relx= 0.8, 
         rely=0.04, 
         width=180, 
         height=61
     )
 
-    self.btInvntCompleto = Button(
+    self.btBuscInventario = Button(
         self.aba_buscar,
         bg= "purple",
         fg= "#FFFFFF",
@@ -91,9 +92,9 @@ def buscar(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("Exibir Inventário Completo")
+        command=lambda: funcBtBuscInventario(self)
     )
-    self.btInvntCompleto.place(
+    self.btBuscInventario.place(
         relx= 0.8, 
         rely=0.15, 
         width=180, 

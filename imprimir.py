@@ -1,4 +1,5 @@
 from modulos import *    
+from funcoes.funcImpr import *
 
 def imprimir(self):       
     self.separator = Frame(         # SEPARADOR
@@ -50,19 +51,19 @@ def imprimir(self):
         rely = 0.2
     )
 
-    self.lbTombo = Label(           # TOMBO
+    self.lbTomboImpr = Label(           # TOMBO
         self.aba_imprimir, 
         text="Tombo:", 
         bg="#D9D9D9",
         font=("Ivy 15 bold"), 
         fg= "black"                     
     )
-    self.lbTombo.place(
+    self.lbTomboImpr.place(
         relx = 0.05,
         rely = 0.05
     )
-    self.inputTombo = Entry(self.aba_imprimir, font=50)
-    self.inputTombo.place(
+    self.inputTomboImpr = Entry(self.aba_imprimir, font=50)
+    self.inputTomboImpr.place(
         relx = 0.25,
         rely = 0.05,
         relwidth=0.4, 
@@ -70,7 +71,7 @@ def imprimir(self):
     )
 
 # ----------- BOTÕES -----------
-    self.btQRCode = Button(
+    self.btImprQRCode = Button(
         self.aba_imprimir,
         bg= "#cc6d2d",
         fg= "#FFFFFF",
@@ -78,16 +79,16 @@ def imprimir(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("QR Code")
+        command=lambda: funcBtImprQRCode(self)
     )
-    self.btQRCode.place(
+    self.btImprQRCode.place(
         relx= 0.15, 
         rely=0.8, 
         width=180, 
         height=61
     )
 
-    self.btCodigoBarras = Button(
+    self.btImprCodigoBarras = Button(
         self.aba_imprimir,
         bg= "#cc6d2d",
         fg= "#FFFFFF",
@@ -95,16 +96,16 @@ def imprimir(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("Detalhes")
+        command=lambda: funcBtImprCodigoBarras(self)
     )
-    self.btCodigoBarras.place(
+    self.btImprCodigoBarras.place(
         relx= 0.4, 
         rely=0.8, 
         width=180, 
         height=61
     )
 
-    self.btImpHist = Button(
+    self.btImprHist = Button(
         self.aba_imprimir,
         bg= "#cc6d2d",
         fg= "#FFFFFF",
@@ -112,16 +113,16 @@ def imprimir(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("Histórico")
+        command=lambda: funcBtImprHist(self)
     )
-    self.btImpHist.place(
+    self.btImprHist.place(
         relx= 0.15, 
         rely=0.65, 
         width=180, 
         height=61
     )
 
-    self.btImpDetal = Button(
+    self.btImprDetal = Button(
         self.aba_imprimir,
         bg= "#cc6d2d",
         fg= "#FFFFFF",
@@ -129,26 +130,26 @@ def imprimir(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("Detalhes")
+        command=lambda: funcBtImprDetal(self)
     )
-    self.btImpDetal.place(
+    self.btImprDetal.place(
         relx= 0.4, 
         rely=0.65, 
         width=180, 
         height=61
     )
 
-    self.btInventario = Button(
+    self.btImprInventario = Button(
         self.aba_imprimir,
-        bg= "#cc6d2d",
+        bg= "purple",
         fg= "#FFFFFF",
         text="Imprimir\nInventário\nCompleto",
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("Imprimir")
+        command=lambda: funcBtImprInventario(self)
     )
-    self.btInventario.place(
+    self.btImprInventario.place(
         relx= 0.8, 
         rely=0.7, 
         width=180, 
@@ -185,5 +186,3 @@ def imprimir(self):
         relwidth=1, 
         relheight=1
     )
-
-   

@@ -1,21 +1,22 @@
 from modulos import *
 from novoHistorico import *
+from funcoes.funcHist import *
 
 def historico(self):
 # ----------- LABELS E INPUTS ----------- 
-    self.lbTombo = Label(           # TOMBO
+    self.lbTomboHist = Label(           # TOMBO
         self.aba_historico, 
         text="Tombo:", 
         bg="#D9D9D9",
         font=("Ivy 15 bold"), 
         fg= "black"                     
     )
-    self.lbTombo.place(
+    self.lbTomboHist.place(
         relx = 0.05,
         rely = 0.08
     )
-    self.inputTombo = Entry(self.aba_historico, font=50)
-    self.inputTombo.place(
+    self.inputTomboHist = Entry(self.aba_historico, font=50)
+    self.inputTomboHist.place(
         relx = 0.15,
         rely = 0.08,
         relwidth=0.4, 
@@ -41,7 +42,7 @@ def historico(self):
     )
 
     
-    self.btBuscar = Button(
+    self.btBuscarHist = Button(
         self.aba_historico,
         bg= "#347deb",
         fg= "#FFFFFF",
@@ -49,9 +50,9 @@ def historico(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: print("Buscar")
+        command=lambda: funcbtBuscarHist(self)
     )
-    self.btBuscar.place(
+    self.btBuscarHist.place(
         relx= 0.62, 
         rely=0.055, 
         width=180, 
@@ -101,4 +102,3 @@ def historico(self):
         relwidth=0.02, 
         relheight=1
     )
-
