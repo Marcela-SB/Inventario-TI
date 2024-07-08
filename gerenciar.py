@@ -63,7 +63,7 @@ def gerenciar(self):
 
     self.btSalvarInventario = Button(
         self.aba_gerenciar,
-        bg= "black",
+        bg= "purple",
         fg= "#FFFFFF",
         text="Salvar\nInventário Atual",
         font=("Inter Regular", 24 * -1),

@@ -1,5 +1,4 @@
 from modulos import *
-from tkinter import messagebox
 
 tk.botao = ""
 

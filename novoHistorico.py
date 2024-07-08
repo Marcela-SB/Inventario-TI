@@ -1,4 +1,5 @@
 from modulos import *
+from funcoes.funcNovoHist import *
 
 def criarNovoHistorico(self):
     self.janelinha = Toplevel()
@@ -28,7 +29,8 @@ def criarNovoHistorico(self):
         text="Criar",
         font=("Inter Regular", 24 * -1),
         relief="flat", 
-        border=2
+        border=2,
+        command= lambda: funcBtNovoHist(self)
     )
     self.btNovoHist.place(
         relx= 0.6, 
@@ -45,7 +47,7 @@ def criarNovoHistorico(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command= self.janelinha.destroy
+        command= lambda: funcBtCancelarHist(self)
 
     )
     self.btCancelarHist.place(
@@ -68,8 +70,8 @@ def criarNovoHistorico(self):
         relx= 0.125,
         rely= 0.075
     )
-    self.inputTombo = Entry(self.novoHist, font=50)
-    self.inputTombo.place(
+    self.inputTomboNovHist = Entry(self.novoHist, font=50)
+    self.inputTomboNovHist.place(
         relx=0.5,
         rely = 0.075,
         relwidth=0.4, 
@@ -137,13 +139,13 @@ def criarNovoHistorico(self):
         rely= 0.65
     )        
     responsaveis = ["Eu", "Tú", "Ele"]  # Lista de responsáveis
-    self.selDestino = ttk.Combobox(
+    self.selResponsavel = ttk.Combobox(
         self.novoHist, 
         values=responsaveis, 
         state="readonly", 
         width=10,
     )
-    self.selDestino.place(
+    self.selResponsavel.place(
         relx=0.5, 
         rely = 0.65
     )

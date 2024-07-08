@@ -1,9 +1,12 @@
 # ARQUIVOS DA MODULARIZAÇÃO
 from modulos import *
+from conexaoBD import*
 from gerenciar import *
 from buscar import *
 from historico import *
 from imprimir import *
+
+
 
 
 class Application(tk.Tk):
@@ -21,6 +24,11 @@ class Application(tk.Tk):
         #self.checkbox()
         self.mainloop()
 
+    '''def chamarConexao(self):
+        iniciar = None
+        while(iniciar == None):
+            iniciar = conectar_bd(self)'''
+
 # ----------- JANELA -----------
     def tela(self):
         self.title("Sistema de Inventário")
@@ -29,6 +37,8 @@ class Application(tk.Tk):
         self.resizable(False, False)          #RESPONSIVIDADE
         #self.maxsize(width="", heigth="")  #TAMANHO MÁXIMO 
         #self.minsize(width="", heigth="")  #TAMANHO MÍNIMO
+
+        
         
 # ----------- FRAME PRINCIPAL -----------
     '''def frameDaTela(self):
@@ -134,6 +144,9 @@ class Application(tk.Tk):
         self.notebook.configure(style='EstiloAbas.TNotebook')
 
 
+        
+
+
 #/////////////////////////////////////////////////
 
 
@@ -206,4 +219,6 @@ class Application(tk.Tk):
         
         print("Botão clicado! Estado:", self.button_toggled)"""
 
+
+    
 Application()
