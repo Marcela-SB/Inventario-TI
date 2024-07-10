@@ -84,7 +84,6 @@ def funcBtAdicionar(self):
         messagebox.showerror("ERRO", "Campos em branco, por favor preencher todos!")
 
 
-
 #///////////////////////////////////////////////////////
 def funcBtSalvarInventario(self):
     messagebox.showinfo("Info", "Botão SalvarInventario")
