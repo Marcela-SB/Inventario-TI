@@ -115,13 +115,13 @@ def buscar(self):
     self.lista = ttk.Treeview(
         self.areaBusca,
         height = 3,
-        column=("col1", "col2", "col3", "col4", "col5")
+        column=("col1", "col2", "col3", "col4")
     )
+    self.lista.heading("#0", text="#")
     self.lista.heading("#1", text="TOMBO")
     self.lista.heading("#2", text="ITEM")
     self.lista.heading("#3", text="DETALHAMENTO")
     self.lista.heading("#4", text="LOCALIZAÇÃO")
-    self.lista.heading("#5", text="STATUS")
 
     self.lista.column("#0", width=2)
 

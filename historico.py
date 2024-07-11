@@ -76,6 +76,7 @@ def historico(self):
         height = 3,
         column=("col1", "col2", "col3", "col4")
     )
+    self.lista.heading("#0", text="#")
     self.entradas.heading("#1", text="DATA/HORA DA OPERAÇÃO")
     self.entradas.heading("#2", text="ORIGEM")
     self.entradas.heading("#3", text="DESTINO")
