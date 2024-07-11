@@ -7,10 +7,10 @@ def verificarItem(self, tb):
 
     try:
         cursor.execute("SELECT tombo FROM item WHERE tombo = %s", (tb,))
-        conexao.commit()
+        result = cursor.fetchone()
 
         # Verifica se o item foi encontrado
-        if cursor.fetchone() is not None:
+        if result is not None:
             return True
         else:
             return False
