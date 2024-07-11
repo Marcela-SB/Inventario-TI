@@ -13,7 +13,7 @@ def funcBtNovoHist(self):
     nvhResp = self.selResponsavel.get()
 
     if(nvhTombo and nvhOrigem and nvhDestino and nvhResp):
-        ''try:
+        try:
         
             # Conectar ao banco de dados
             conexao = conectar_bd(self)
