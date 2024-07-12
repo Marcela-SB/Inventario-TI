@@ -14,3 +14,26 @@ Sistema contém como funções:
 Linguagem: ![Python](https://img.shields.io/badge/-Python-0D1117?style=for-the-badge&logo=python&labelColor=0D1117)&nbsp;
 
 Bibliotecas: **Tkinter**
+
+</br>
+
+# BANCO DE DADOS:
+
+**Tabela *salas*:**
+- *salaId* CHAR(3) PRIMARY KEY,
+- *funcao* VARCHAR(30),
+- *predio* VARCHAR(10)
+  
+**Tabela *item*:**
+- *tombo* CHAR(10) PRIMARY KEY,
+- *tipo* VARCHAR(20),
+- *descricao* VARCHAR(50),
+- *salaId* CHAR(3), FOREIGN KEY (*salaId*) REFERENCES **salas**(*salaId*)
+
+**Tabela *movimentacao*:**
+- *id INT AUTO_INCREMENT PRIMARY KEY,
+- *ItemID* CHAR(10), FOREIGN KEY (*ItemID*) REFERENCES **item**(*tombo*),
+- *salaOrigemID* CHAR(3), FOREIGN KEY (*salaOrigemID*) REFERENCES **salas**(*salaId*),
+- *salaDestinoID* CHAR(3), FOREIGN KEY (*salaDestinoID*) REFERENCES **salas**(*salaId*),
+- *data* DATE,
+- *responsavel* VARCHAR(50)
