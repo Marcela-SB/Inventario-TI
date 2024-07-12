@@ -1,7 +1,6 @@
 import mysql.connector
 
 # Conecta ao MySQL
-
 mydb = mysql.connector.connect(
     host="localhost",
     user="admin",
@@ -10,10 +9,8 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-
 # mycursor.execute("DROP DATABASE inventario")
 # mycursor.execute("CREATE DATABASE inventario")
-
 
 # Cria o database se não existir
 mycursor.execute("CREATE DATABASE IF NOT EXISTS inventario")
@@ -51,16 +48,28 @@ mycursor.execute("""
 mycursor.execute("""
     CREATE TABLE IF NOT EXISTS movimentacao (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        ItemID CHAR(10),
-        FOREIGN KEY (ItemID) REFERENCES item(tombo),
-        salaOrigemID CHAR(3),
-        FOREIGN KEY (salaOrigemID) REFERENCES salas(salaId),
-        salaDestinoID CHAR(3),
-        FOREIGN KEY (salaDestinoID) REFERENCES salas(salaId),
+        itemID CHAR(10),
+        FOREIGN KEY (itemID) REFERENCES item(tombo),
+        salaOrigemId CHAR(3),
+        FOREIGN KEY (salaOrigemId) REFERENCES salas(salaId),
+        salaDestino CHAR(3),
+        FOREIGN KEY (salaDestino) REFERENCES salas(salaId),
         data DATE,
         responsavel VARCHAR(50)
     )
 """)
+
+# Renomear coluna 'c1' para 'c2' na tabela 'tab'
+'''mycursor.execute("""
+    ALTER TABLE tab 
+    CHANGE COLUMN c1 c2 TipoDados(?)
+""")'''
+
+# Excluir coluna 'c1' da tabela 'tab'
+'''mycursor.execute("""
+    ALTER TABLE tab 
+    DROP COLUMN c1
+""")'''
 
 # Fecha a conexão
 mydb.close()

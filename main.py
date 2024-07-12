@@ -7,8 +7,6 @@ from historico import *
 from imprimir import *
 
 
-
-
 class Application(tk.Tk):
 # ----------- INICIALIZAÇÃO -----------
     def __init__(self):
@@ -24,7 +22,7 @@ class Application(tk.Tk):
         #self.checkbox()
         self.mainloop()
 
-    '''def chamarConexao(self):
+        '''def chamarConexao(self):
         iniciar = None
         while(iniciar == None):
             iniciar = conectar_bd(self)'''
@@ -84,7 +82,7 @@ class Application(tk.Tk):
         )
 
 
-        # Carregar a imagem
+        '''# Carregar a imagem
         imagem_path = os.path.join(os.path.dirname(__file__), "imagens/ufrn.png")
         imagem = Image.open(imagem_path)
         imagem = imagem.resize((187, 100), Image.ANTIALIAS)  # Largura x Altura
@@ -100,7 +98,7 @@ class Application(tk.Tk):
         self.label_imagem.place(
             relx=0.82, 
             rely=0.01
-        )
+        )'''
 
 
 # ----------- ABAS MENU -----------

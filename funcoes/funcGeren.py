@@ -64,7 +64,7 @@ def funcBtAdicionar(self):
             if not messagebox.askyesno("Item existente", "Item já existe, deseja sobrescrever?"):
                 return  # Cancela a adição se o usuário não deseja sobrescrever
         try:
-            cursor.execute("INSERT INTO item (tombo, tipo, ident, salaId) VALUES (%s, %s, %s, %s)", (adicTombo, adicItem, adicDescricao, adicSala))
+            cursor.execute("INSERT INTO item (tombo, tipo, descricao, salaId) VALUES (%s, %s, %s, %s)", (adicTombo, adicItem, adicDescricao, adicSala))
             conexao.commit()
             messagebox.showinfo("Sucesso", "Item adicionado com sucesso!")
     
