@@ -76,12 +76,13 @@ def historico(self):
         height = 3,
         column=("col1", "col2", "col3", "col4")
     )
+    self.entradas.heading("#0", text="#")
     self.entradas.heading("#1", text="DATA/HORA DA OPERAÇÃO")
     self.entradas.heading("#2", text="ORIGEM")
     self.entradas.heading("#3", text="DESTINO")
     self.entradas.heading("#4", text="RESPONSÁVEL")
 
-    self.entradas.column("#0", width=0, stretch=tk.NO)
+    self.entradas.column("#0", width=2)
 
     self.entradas.place(
         relx= 0.0, 
