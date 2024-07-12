@@ -1,6 +1,7 @@
 import mysql.connector
 
 # Conecta ao MySQL
+
 mydb = mysql.connector.connect(
     host="localhost",
     user="admin",
@@ -9,7 +10,13 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
+
+# mycursor.execute("DROP DATABASE inventario")
+# mycursor.execute("CREATE DATABASE inventario")
+
+
 # Cria o database se não existir
+mycursor.execute("CREATE DATABASE IF NOT EXISTS inventario")
 
 # Conecta ao banco de dados inventario
 mydb = mysql.connector.connect(
@@ -22,7 +29,7 @@ mycursor = mydb.cursor()
 
 # Criando tabela salas
 mycursor.execute("""
-    CREATE TABLE salas (
+    CREATE TABLE IF NOT EXISTS salas (
         salaId CHAR(3) PRIMARY KEY,
         funcao VARCHAR(30),
         predio VARCHAR(10)
@@ -31,7 +38,7 @@ mycursor.execute("""
 
 # Criando tabela item
 mycursor.execute("""
-    CREATE TABLE item (
+    CREATE TABLE IF NOT EXISTS item (
         tombo CHAR(10) PRIMARY KEY,
         tipo VARCHAR(20),
         descricao VARCHAR(50),
@@ -42,7 +49,7 @@ mycursor.execute("""
 
 # Criando tabela movimentação
 mycursor.execute("""
-    CREATE TABLE movimentacao (
+    CREATE TABLE IF NOT EXISTS movimentacao (
         id INT AUTO_INCREMENT PRIMARY KEY,
         ItemID CHAR(10),
         FOREIGN KEY (ItemID) REFERENCES item(tombo),
