@@ -60,6 +60,9 @@ def gerenciar(self):
         width=180, 
         height=61
     )
+    
+    '''balaoExcluir = tix.Balloon(self.aba_gerenciar)
+    balaoExcluir.bind_widget(self.btExcluir, balloonmsg = "Necessário apenas o TOMBO")'''
 
     self.btSalvarInventario = Button(
         self.aba_gerenciar,

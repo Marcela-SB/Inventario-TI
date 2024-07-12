@@ -41,7 +41,7 @@ def funcBtImprDetal(self):
                 cursor2 = conexao2.cursor()
 
                 # Consultar detalhes do item
-                cursor2.execute("SELECT tombo, tipo, ident, salaId FROM item WHERE tombo = %s", (tbImpr,))
+                cursor2.execute("SELECT tombo, tipo, descricao, salaId FROM item WHERE tombo = %s", (tbImpr,))
                 item = cursor2.fetchone()  # Consumir o resultado da consulta
                 if not item:
                     messagebox.showerror("Erro", "Item não encontrado.")
@@ -56,16 +56,15 @@ def funcBtImprDetal(self):
                 self.r.setFont("Helvetica", 16)
                 self.r.drawString(100, 730, f"Tombo: {item[0]}")
                 self.r.drawString(100, 710, f"Tipo: {item[1]}")
-                self.r.drawString(100, 690, f"Identificação: {item[2]}")
+                self.r.drawString(100, 690, f"Descrição: {item[2]}")
                 
                 # Buscar detalhes da sala com base no 'salaId'
-                cursor2.execute("SELECT tipo, descricao, predio FROM salas WHERE salaId = %s", (item[3],))
+                cursor2.execute("SELECT funcao, predio FROM salas WHERE salaId = %s", (item[3],))
                 sala = cursor2.fetchone()  # Consumir o resultado da consulta
                 if sala:
                     self.r.drawString(100, 670, f"Sala: {item[3]}")
-                    self.r.drawString(150, 650, f"- Tipo: {sala[0]}")
-                    self.r.drawString(150, 630, f"- Descrição: {sala[1]}")
-                    self.r.drawString(150, 610, f"- Prédio: {sala[2]}")
+                    self.r.drawString(150, 650, f"- Função: {sala[0]}")
+                    self.r.drawString(150, 630, f"- Prédio: {sala[1]}")
                 else:
                     self.r.drawString(100, 670, f"Sala não encontrada para salaId: {item[3]}")
 
