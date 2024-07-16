@@ -7,7 +7,6 @@ def show_app(app_instance):
     app_instance.root.withdraw()  # Esconder a janela de login
 
 def verificarSenha(self, pw):
-    print(pw)
     conexao = conectar_bd(self)
     cursor = conexao.cursor()
     query = "SELECT senha FROM user WHERE senha = %s"

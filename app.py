@@ -1,7 +1,7 @@
 from modulos import *
 from gerenciar import *
 from buscar import *
-from historico import *
+from movimetacao import *
 from imprimir import *
 
 # ----------- JANELA -----------
