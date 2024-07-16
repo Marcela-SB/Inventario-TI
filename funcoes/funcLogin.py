@@ -1,4 +1,5 @@
 from modulos import *
+from conexaoBD import *
 
 
 def show_app(app_instance):
