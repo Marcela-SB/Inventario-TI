@@ -2,6 +2,7 @@
 from modulos import *
 from conexaoBD import*
 from funcoes.funcLogin import *
+from novoUser import *
 from app import *
 
 
@@ -103,7 +104,7 @@ class Application:
             font=("Inter Regular", 20 * -1),
             relief="flat", 
             border=2,
-            command=lambda: novoUser(self)
+            command=lambda: criarNovoUser(self)
         )
         self.btNovoUser.place(
             relx = 0.2,
