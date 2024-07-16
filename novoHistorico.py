@@ -78,6 +78,8 @@ def criarNovoHistorico(self):
         height=30
     )
 
+    
+
 
     self.origem = Label(
         self.novoHist,
@@ -92,6 +94,7 @@ def criarNovoHistorico(self):
     )
     numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
     self.selOrigem = ttk.Combobox(
+        
         self.novoHist, 
         values=numeros, 
         state="readonly", 
