@@ -3,18 +3,18 @@ from conexaoBD import *
 
 tk.botao = ""
 
-def funcbtBuscarHist(self):
+def funcbtBuscarMov(self):
     # CONECTANDO O BD E INICIALIZANDO CURSOR
     conexao = conectar_bd(self)
     cursor = conexao.cursor()
 
     # RECEBENDO OS VALORES DOS ENTRYS
-    tbHist = self.inputTomboHist.get()
+    tbMov = self.inputTomboMov.get()
 
     # SE TODOS OS VALORES NÃO FOREM NULL
-    if tbHist:
+    if tbMov:
         try:
-            cursor.execute(f"SELECT data, salaOrigem, salaDestino, responsavel FROM movimentacao WHERE itemId = {tbHist} ORDER BY id ASC")
+            cursor.execute(f"SELECT data, salaOrigem, salaDestino, responsavel FROM movimentacao WHERE itemId = {tbMov} ORDER BY id ASC")
             resultados = cursor.fetchall()  # Ler todos os resultados
 
             # Limpar Treeview

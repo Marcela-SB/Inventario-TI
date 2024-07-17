@@ -1,8 +1,10 @@
 from modulos import *
+from funcoes.funcLogin import *
 from gerenciar import *
 from buscar import *
-from movimetacao import *
+from movimentacao import *
 from imprimir import *
+
 
 # ----------- JANELA -----------
 class App(tk.Toplevel):
@@ -19,8 +21,18 @@ class App(tk.Toplevel):
         menu(self)
         gerenciar(self)
         buscar(self)
-        historico(self)
+        movimentacao(self)
         imprimir(self)
+
+#----------------- FECHAMENTO DE ROOT E APP -------------
+        self.root = root  # Guarda a referência para a janela principal
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
+
+    def on_closing(self):
+        self.destroy()  # Fecha a janela atual
+        self.root.destroy()  # Fecha a janela principal
+
+    
 
 # ----------- LOGO E NOME SISTEMA -----------
 def id(self):
@@ -83,19 +95,19 @@ def menu(self):
     # CRIANDO FRAMES PARA CADA ABA
     self.aba_gerenciar = tk.Frame(self.notebook, bg="#D9D9D9")
     self.aba_buscar = tk.Frame(self.notebook, bg="#D9D9D9")
-    self.aba_historico = tk.Frame(self.notebook, bg="#D9D9D9")
+    self.aba_movimentacao = tk.Frame(self.notebook, bg="#D9D9D9")
     self.aba_imprimir = tk.Frame(self.notebook, bg="#D9D9D9")
 
     # Add frames to notebook (tab container)
     self.notebook.add(self.aba_gerenciar, text="Gerenciar")
     self.notebook.add(self.aba_buscar, text="Buscar")
-    self.notebook.add(self.aba_historico, text="Histórico")
+    self.notebook.add(self.aba_movimentacao, text="Movimentação")
     self.notebook.add(self.aba_imprimir, text="Impressão")
 
     # CONTEÚDOS DAS ABAS
     tk.Label(self.aba_gerenciar, bg="#D9D9D9").pack(pady=20)
     tk.Label(self.aba_buscar, bg="#D9D9D9").pack(pady=20)
-    tk.Label(self.aba_historico, bg="#D9D9D9").pack(pady=20)
+    tk.Label(self.aba_movimentacao, bg="#D9D9D9").pack(pady=20)
     tk.Label(self.aba_imprimir, bg="#D9D9D9").pack(pady=20)
 
     style = ttk.Style()

@@ -8,3 +8,13 @@ from PIL import Image, ImageTk
 import mysql.connector
 from tkinter import messagebox
 #from tkinter import tix
+import config
+
+
+def responsa(nome):
+    global nameUser
+    config.nameUser = nome
+
+def NivelUser(nivel):
+    global acessNv
+    config.acessNv = nivel

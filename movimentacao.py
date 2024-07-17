@@ -2,21 +2,21 @@ from modulos import *
 from novaMovimentacao import *
 from funcoes.funcMov import *
 
-def historico(self):
+def movimentacao(self):
 # ----------- LABELS E INPUTS ----------- 
-    self.lbTomboHist = Label(           # TOMBO
-        self.aba_historico, 
+    self.lbTomboMov = Label(           # TOMBO
+        self.aba_movimentacao, 
         text="Tombo:", 
         bg="#D9D9D9",
         font=("Ivy 15 bold"), 
         fg= "black"                     
     )
-    self.lbTomboHist.place(
+    self.lbTomboMov.place(
         relx = 0.05,
         rely = 0.08
     )
-    self.inputTomboHist = Entry(self.aba_historico, font=50)
-    self.inputTomboHist.place(
+    self.inputTomboMov = Entry(self.aba_movimentacao, font=50)
+    self.inputTomboMov.place(
         relx = 0.15,
         rely = 0.08,
         relwidth=0.4, 
@@ -24,17 +24,17 @@ def historico(self):
     )
 
 # ----------- BOTÕES -----------         
-    self.btNovo = Button(
-        self.aba_historico,
+    self.btNovaMov = Button(
+        self.aba_movimentacao,
         bg= "#2EC27B",
         fg= "#FFFFFF",
         text="Novo",
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: criarNovoHistorico(self)
+        command=lambda: criarNovaMovimentacao(self)
     )
-    self.btNovo.place(
+    self.btNovaMov.place(
         relx= 0.8, 
         rely=0.055, 
         width=180, 
@@ -42,17 +42,17 @@ def historico(self):
     )
 
     
-    self.btBuscarHist = Button(
-        self.aba_historico,
+    self.btBuscarMov = Button(
+        self.aba_movimentacao,
         bg= "#347deb",
         fg= "#FFFFFF",
         text="Buscar",
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: funcbtBuscarHist(self)
+        command=lambda: funcbtBuscarMov(self)
     )
-    self.btBuscarHist.place(
+    self.btBuscarMov.place(
         relx= 0.62, 
         rely=0.055, 
         width=180, 
@@ -60,10 +60,10 @@ def historico(self):
     )
 
 
-# ----------- TABELA DE HISTÓRICO -----------  
+# ----------- TABELA DE MovÓRICO -----------  
     # "DIV"
-    self.areaHistorico = Frame(self.aba_historico, bg="#D9D9D9")
-    self.areaHistorico.place(
+    self.areamovimentacao = Frame(self.aba_movimentacao, bg="#D9D9D9")
+    self.areamovimentacao.place(
         relx= 0.02, 
         rely=0.205, 
         relwidth=0.95, 
@@ -72,7 +72,7 @@ def historico(self):
 
     # COLUNAS
     self.entradas = ttk.Treeview(
-        self.areaHistorico,
+        self.areamovimentacao,
         height = 3,
         column=("col1", "col2", "col3", "col4")
     )
@@ -92,7 +92,7 @@ def historico(self):
     )
 
     self.scroolEntradas = Scrollbar(
-        self.areaHistorico,
+        self.areamovimentacao,
         orient="vertical"
     )
     self.entradas.configure(yscrollcommand= self.scroolEntradas.set)

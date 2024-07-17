@@ -1,8 +1,10 @@
 # ARQUIVOS DA MODULARIZAÇÃO
 from modulos import *
 from conexaoBD import*
+from novoUser import *
 from funcoes.funcLogin import *
 from app import *
+
 
 
 class Application:
@@ -32,6 +34,10 @@ class Application:
             relwidth=0.98, 
             relheight=0.78
         )'''
+
+        
+
+
 
 # LABELS
         self.lbLogin = Label( 
@@ -86,7 +92,7 @@ class Application:
             font=("Inter Regular", 20 * -1),
             relief="flat", 
             border=2,
-            command=lambda: validarUser(self)
+            command=lambda: validarUser(self) #show_app(self)
         )
         self.btLogin.place(
             relx = 0.68,
@@ -103,7 +109,7 @@ class Application:
             font=("Inter Regular", 20 * -1),
             relief="flat", 
             border=2,
-            command=lambda: novoUser(self)
+            command=lambda: criarNovoUser(self)
         )
         self.btNovoUser.place(
             relx = 0.2,

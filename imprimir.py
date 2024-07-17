@@ -105,17 +105,17 @@ def imprimir(self):
         height=61
     )
 
-    self.btImprHist = Button(
+    self.btImprMov = Button(
         self.aba_imprimir,
         bg= "#cc6d2d",
         fg= "#FFFFFF",
-        text="Histórico",
+        text="Movimentação",
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command=lambda: funcBtImprHist(self)
+        command=lambda: funcBtImprMov(self)
     )
-    self.btImprHist.place(
+    self.btImprMov.place(
         relx= 0.15, 
         rely=0.65, 
         width=180, 
