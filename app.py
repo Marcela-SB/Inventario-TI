@@ -1,8 +1,10 @@
 from modulos import *
+from funcoes.funcLogin import *
 from gerenciar import *
 from buscar import *
 from movimentacao import *
 from imprimir import *
+
 
 # ----------- JANELA -----------
 class App(tk.Toplevel):
@@ -19,8 +21,18 @@ class App(tk.Toplevel):
         menu(self)
         gerenciar(self)
         buscar(self)
-        historico(self)
+        movimentacao(self)
         imprimir(self)
+
+#----------------- FECHAMENTO DE ROOT E APP -------------
+        self.root = root  # Guarda a referência para a janela principal
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
+
+    def on_closing(self):
+        self.destroy()  # Fecha a janela atual
+        self.root.destroy()  # Fecha a janela principal
+
+    
 
 # ----------- LOGO E NOME SISTEMA -----------
 def id(self):

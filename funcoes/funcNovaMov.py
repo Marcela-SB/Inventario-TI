@@ -1,11 +1,45 @@
 from modulos import *
 from conexaoBD import *
+from funcoes.bdBuscar import *
 from datetime import datetime
 
 tk.botao = ""
 
+def abrirJanelinha(self, gtb):
+    if(verificarItem(self, gtb)):
+        return True
+    else:
+        return False
+
+
+def info(self):
+    getTombo = str(self.inputTomboMov.get())
+    if(getTombo):
+        try:
+            # Conectar ao banco de dados
+            conexao = conectar_bd(self)
+            cursor = conexao.cursor()
+            
+            cursor.execute("SELECT tombo, salaId FROM item WHERE tombo = %s", (getTombo,))
+            item = cursor.fetchone()
+
+
+        except mysql.connector.Error as err:
+            messagebox.showerror("Erro", f"Erro ao buscar dados de item: {err}")
+            item = None
+        finally:
+            cursor.close()
+            conexao.close()
+        #getUser = 
+        return item
+    
+    else:
+        messagebox.showwarning("Atenção!", "Campo de TOMBO em branco! Por favor preencher.")
+        return False
+
+
 """def getDados(self):
-    getTombo = self.inputTomboNovHist.get()
+    getTombo = self.inputTomboNovMov.get()
     if(getTombo):
         try:
         
@@ -23,9 +57,9 @@ tk.botao = ""
             cursor.close()
             conexao.close()"""
 
-def funcBtNovoHist(self):
+def funcBtCriarNovaMov(self):
     #RECEBENDO DADOS
-    nvmTombo = self.inputTomboNovHist.get()
+    nvmTombo = self.inputTomboNovMov.get()
     nvmOrigem = self.selOrigem.get()
     nvmDestino = self.selDestino.get()
     nvmResp = self.selResponsavel.get()
@@ -53,7 +87,8 @@ def funcBtNovoHist(self):
 
 
 
-def funcBtCancelarHist(self):
-    opcaoCancelarHist = messagebox.askyesno("Sair de Novo Histórico", "Deseja mesmo cancelar a nova Entrada em Histórico?")
-    if(opcaoCancelarHist):
+def funcBtCancelarMov(self):
+    opcaoCancelarMov = messagebox.askyesno("Sair de Nova Movimentação", "Deseja mesmo cancelar a nova Entrada em Movimentação?")
+    if(opcaoCancelarMov):
         self.janelinha.destroy()
+

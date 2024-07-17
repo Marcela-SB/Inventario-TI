@@ -21,12 +21,11 @@ def verificarSenha(self, pw):
         messagebox.showwarning("Erro", "Senha incorreta!!!")
 
 def validarUser(self):
+    global nameUser
     user = self.inputLogin.get()
-
     pw = self.inputSenha.get()
 
     if(user and pw):
-        
         try:
             conexao = conectar_bd(self)
             cursor = conexao.cursor()
@@ -43,6 +42,10 @@ def validarUser(self):
             if (existe == False):
                 messagebox.showwarning("Erro", "Usuário não encontrado!") 
         finally:
+            responsa(user)
+            nameUser1 = str(self.inputLogin.get())
+            print(nameUser1)
+            print(nameUser)
             cursor.close()
             conexao.close()
     else:
@@ -51,37 +54,4 @@ def validarUser(self):
         iniciar = None
         while(iniciar == None):
             iniciar = conectar_bd(self)'''
-
-
-def novoUser(self):
-    messagebox.showinfo("Info", "Botão Novo User")
-    
-    user = self.inputNovoLogin.get()
-    eml = self.inputNovoEmail.get()
-    acss = self.selAcesso.get()
-    pw = self.inputSenha1.get()
-    cpw = self.inputConfirmSenha.get()
-
-    if(pw == cpw):
-    
-        try:
-            # Conectar ao banco de dados
-            conexao = conectar_bd(self)
-            cursor = conexao.cursor()
-
-            cursor.execute("")
-            cursor.execute("INSERT INTO users (login, email, acesso, senha) VALUES (%s, %s, %s, %s)", ())
-            conexao.commit()
-            messagebox.showinfo("Sucesso", "Movimentação criada com sucesso!")
-            
-            self.janelinha.destroy()
-
-        except mysql.connector.Error as err:
-            messagebox.showerror("Erro", f"Erro ao criar nova movimentação: {err}")
-        finally:
-            cursor.close()
-            conexao.close()
-
-    else:
-        messagebox.showerror("Senhas", "Senha e senha de confirmação estão diferentes, por favor verificar!")
 

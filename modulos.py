@@ -8,3 +8,10 @@ from PIL import Image, ImageTk
 import mysql.connector
 from tkinter import messagebox
 #from tkinter import tix
+
+nameUser = ""
+
+def responsa(nome):
+    global nameUser
+    nameUser = nome
+    print(nameUser)

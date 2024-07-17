@@ -21,9 +21,9 @@ def funcBtImprCodigoBarras(self):
     #self.btImprCodigoBarras
 
 
-def funcBtImprHist(self):
-    messagebox.showinfo("Info", "Botão ImprHist")
-    #self.btImprHist
+def funcBtImprMov(self):
+    messagebox.showinfo("Info", "Botão ImprMov")
+    #self.btImprMov
     
 
 def funcBtImprDetal(self):
