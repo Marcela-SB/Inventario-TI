@@ -57,4 +57,3 @@ def funcBtCancelarHist(self):
     opcaoCancelarHist = messagebox.askyesno("Sair de Novo Histórico", "Deseja mesmo cancelar a nova Entrada em Histórico?")
     if(opcaoCancelarHist):
         self.janelinha.destroy()
-
