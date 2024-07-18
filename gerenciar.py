@@ -11,7 +11,7 @@ def gerenciar(self):
      )
     self.separator1.place(
         relx=0.01, 
-        rely=0.45, 
+        rely=0.55, 
         relwidth=0.98) 
     
     self.separator2 = Frame(         # SEPARADOR 2
@@ -114,7 +114,7 @@ def gerenciar(self):
     )
     self.inputTomboGer = Entry(self.aba_gerenciar, font=50)
     self.inputTomboGer.place(
-        relx = 0.25,
+        relx = 0.15,
         rely = 0.05,
         relwidth=0.4, 
         height=30
@@ -133,7 +133,7 @@ def gerenciar(self):
     )
     self.inputItemGer = Entry(self.aba_gerenciar, font=50)
     self.inputItemGer.place(
-        relx = 0.25,
+        relx = 0.15,
         rely = 0.127,
         relwidth=0.4, 
         height=30
@@ -152,7 +152,7 @@ def gerenciar(self):
     )
     self.inputDescricaoGer = Entry(self.aba_gerenciar, font=50)
     self.inputDescricaoGer.place(
-        relx = 0.25,
+        relx = 0.15,
         rely = 0.21,
         relwidth=0.4, 
         height=30
@@ -183,11 +183,32 @@ def gerenciar(self):
         width=10
     )
     self.comboboxGer.place(
-        relx=0.25, 
+        relx=0.15, 
         rely = 0.31
     )
     style = ttk.Style()
     style.configure('TCombobox', padding=(10, 5, 10, 5), arrowsize=15)
+
+    self.lbObsGer = Label(           # OBS
+        self.aba_gerenciar, 
+        text="OBS:", 
+        bg="#D9D9D9",
+        font=("Ivy 15 bold"), 
+        fg= "black"                     
+    )
+    self.lbObsGer.place(
+        relx = 0.05,
+        rely = 0.4
+    )
+    self.inputObsGer = Entry(self.aba_gerenciar, font=50)
+    self.inputObsGer.place(
+        relx = 0.15,
+        rely = 0.41,
+        relwidth=0.4, 
+        height=30
+    )
+
+
 
 
 

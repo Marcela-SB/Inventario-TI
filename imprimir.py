@@ -176,7 +176,7 @@ def imprimir(self):
     self.conferindo.heading("#2", text="ITEM")
     self.conferindo.heading("#3", text="DETALHAMENTO")
     self.conferindo.heading("#4", text="LOCALIZAÇÃO")
-    self.conferindo.heading("#5", text="STATUS")
+    self.conferindo.heading("#5", text="OBS")
 
     self.conferindo.column("#0", width=0, stretch=tk.NO)
 

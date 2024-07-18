@@ -3,26 +3,6 @@ from novaMovimentacao import *
 from funcoes.funcMov import *
 
 def movimentacao(self):
-# ----------- LABELS E INPUTS ----------- 
-    self.lbTomboMov = Label(           # TOMBO
-        self.aba_movimentacao, 
-        text="Tombo:", 
-        bg="#D9D9D9",
-        font=("Ivy 15 bold"), 
-        fg= "black"                     
-    )
-    self.lbTomboMov.place(
-        relx = 0.05,
-        rely = 0.08
-    )
-    self.inputTomboMov = Entry(self.aba_movimentacao, font=50)
-    self.inputTomboMov.place(
-        relx = 0.15,
-        rely = 0.08,
-        relwidth=0.4, 
-        height=30
-    )
-
 # ----------- BOTÕES -----------         
     self.btNovaMov = Button(
         self.aba_movimentacao,
@@ -60,27 +40,104 @@ def movimentacao(self):
     )
 
 
-# ----------- TABELA DE MovÓRICO -----------  
+# ----------- LABELS E INPUTS ----------- 
+    self.lbTomboMov = Label(           # TOMBO
+        self.aba_movimentacao, 
+        text="Tombo:", 
+        bg="#D9D9D9",
+        font=("Ivy 15 bold"), 
+        fg= "black"                     
+    )
+    self.lbTomboMov.place(
+        relx = 0.05,
+        rely = 0.05
+    )
+    self.inputTomboMov = Entry(self.aba_movimentacao, font=50)
+    self.inputTomboMov.place(
+        relx = 0.15,
+        rely = 0.06,
+        relwidth=0.4, 
+        height=30
+    )
+
+    self.lbDataMov = Label(           # DATA
+        self.aba_movimentacao, 
+        text="Data:", 
+        bg="#D9D9D9",
+        font=("Ivy 15 bold"), 
+        fg= "black"                     
+    )
+    self.lbDataMov.place(
+        relx = 0.05,
+        rely = 0.125
+    )
+    self.inputDataMov = Entry(self.aba_movimentacao, font=50)
+    self.inputDataMov.place(
+        relx = 0.15,
+        rely = 0.127,
+        relwidth=0.4, 
+        height=30
+    )
+
+    self.lbSalaMov = Label(           # SALA
+        self.aba_movimentacao, 
+        text="Sala:", 
+        bg="#D9D9D9",
+        font=("Ivy 15 bold"), 
+        fg= "black"                     
+    )
+    self.lbSalaMov.place(
+        relx = 0.05,
+        rely = 0.21
+    )
+
+                                            # LISTA SUSPENSA
+    numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
+    self.comboboxMov = ttk.Combobox(
+        self.aba_movimentacao, 
+        values=numeros, 
+        state="readonly", 
+        width=10,
+    )
+    self.comboboxMov.place(
+        relx=0.15, 
+        rely = 0.21
+    )
+
+# ----------- TABELA DE MOVIMENTAÇÃO -----------  
     # "DIV"
     self.areamovimentacao = Frame(self.aba_movimentacao, bg="#D9D9D9")
     self.areamovimentacao.place(
         relx= 0.02, 
-        rely=0.205, 
+        rely=0.3, 
         relwidth=0.95, 
-        relheight=0.78
+        relheight=0.67
     )
 
     # COLUNAS
     self.entradas = ttk.Treeview(
         self.areamovimentacao,
         height = 3,
-        column=("col1", "col2", "col3", "col4")
+        column=("col1", "col2", "col3", "col4", "col5", "col6", "col7")
     )
     self.entradas.heading("#0", text="#")
-    self.entradas.heading("#1", text="DATA/HORA DA OPERAÇÃO")
-    self.entradas.heading("#2", text="ORIGEM")
-    self.entradas.heading("#3", text="DESTINO")
-    self.entradas.heading("#4", text="RESPONSÁVEL")
+    self.entradas.heading("#1", text="TOMBO")
+    self.entradas.heading("#2", text="ITEM")
+    self.entradas.heading("#3", text="ORIGEM")
+    self.entradas.heading("#4", text="DESTINO")
+    self.entradas.heading("#5", text="DATA")
+    self.entradas.heading("#6", text="HORA")
+    self.entradas.heading("#7", text="RESPONSÁVEL")
+
+    # Ajustar largura das colunas
+    self.entradas.column("#0", width=40)
+    self.entradas.column("col1", width=100, anchor='center', stretch=True)
+    self.entradas.column("col2", width=100, anchor='center', stretch=True)
+    self.entradas.column("col3", width=80, anchor='center', stretch=True)
+    self.entradas.column("col4", width=80, anchor='center', stretch=True)
+    self.entradas.column("col5", width=80, anchor='center', stretch=True)
+    self.entradas.column("col6", width=80, anchor='center', stretch=True)
+    self.entradas.column("col7", width=150, anchor='center', stretch=True)
 
     self.entradas.column("#0", width=2)
 

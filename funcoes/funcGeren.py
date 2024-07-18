@@ -30,6 +30,7 @@ def funcBtExcluir(self):
                     self.inputItemGer.delete(0, END)
                     self.inputDescricaoGer.delete(0,END)
                     self.valor_combobox.set("")
+                    self.inputObsGer.delete(0,END)
 
                 except mysql.connector.Error as err:
                     messagebox.showerror("Erro", f"Erro ao excluir item: {err}")
@@ -55,6 +56,10 @@ def funcBtAdicionar(self):
     adicItem = self.inputItemGer.get()
     adicDescricao = self.inputDescricaoGer.get()
     adicSala = self.comboboxGer.get()
+    adicObs = self.inputObsGer.get()
+
+    if(adicObs==""):
+        adicObs = "-"
 
     # SE TODOS OS VALORES NÃO FOREM NULL
     if(adicTombo and adicItem and adicDescricao and adicSala):
@@ -64,7 +69,7 @@ def funcBtAdicionar(self):
             if not messagebox.askyesno("Item existente", "Item já existe, deseja sobrescrever?"):
                 return  # Cancela a adição se o usuário não deseja sobrescrever
         try:
-            cursor.execute("INSERT INTO item (tombo, tipo, descricao, salaId) VALUES (%s, %s, %s, %s)", (adicTombo, adicItem, adicDescricao, adicSala))
+            cursor.execute("INSERT INTO item (tombo, tipo, descricao, salaId, obs) VALUES (%s, %s, %s, %s, %s)", (adicTombo, adicItem, adicDescricao, adicSala, adicObs))
             conexao.commit()
             messagebox.showinfo("Sucesso", "Item adicionado com sucesso!")
     
@@ -73,6 +78,7 @@ def funcBtAdicionar(self):
             self.inputItemGer.delete(0, END)
             self.inputDescricaoGer.delete(0,END)
             self.valor_combobox.set("")
+            self.inputObsGer.delete(0,END)
 
         except mysql.connector.Error as err:
             messagebox.showerror("Erro", f"Erro ao adicionar item: {err}")

@@ -16,7 +16,7 @@ def buscar(self):
     )
     self.inputTomboBusc = Entry(self.aba_buscar, font=50)
     self.inputTomboBusc.place(
-        relx = 0.25,
+        relx = 0.15,
         rely = 0.06,
         relwidth=0.4, 
         height=30
@@ -35,7 +35,7 @@ def buscar(self):
     )
     self.inputItemBusc = Entry(self.aba_buscar, font=50)
     self.inputItemBusc.place(
-        relx = 0.25,
+        relx = 0.15,
         rely = 0.127,
         relwidth=0.4, 
         height=30
@@ -101,6 +101,7 @@ def buscar(self):
         height=61
     )
 
+
 # ----------- TABELA DE BUSCA -----------  
     # "DIV"
     self.areaBusca = Frame(self.aba_buscar, bg="#D9D9D9")
@@ -115,15 +116,21 @@ def buscar(self):
     self.lista = ttk.Treeview(
         self.areaBusca,
         height = 3,
-        column=("col1", "col2", "col3", "col4")
+        column=("col1", "col2", "col3", "col4", "col5")
     )
     self.lista.heading("#0", text="#")
     self.lista.heading("#1", text="TOMBO")
     self.lista.heading("#2", text="ITEM")
     self.lista.heading("#3", text="DETALHAMENTO")
     self.lista.heading("#4", text="LOCALIZAÇÃO")
+    self.lista.heading("#5", text="OBS")
 
-    self.lista.column("#0", width=2)
+    self.lista.column("#0", width=40, stretch=False)
+    self.lista.column("#1", anchor="center")
+    self.lista.column("#2", anchor="center")
+    self.lista.column("#3", anchor="center")
+    self.lista.column("#4", anchor="center")
+    self.lista.column("#5", anchor="center")
 
     self.lista.place(
         relx= 0.0, 

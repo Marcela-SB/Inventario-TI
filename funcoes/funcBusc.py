@@ -35,7 +35,7 @@ def funcBtBuscar(self):
         restricoes_sql = " AND ".join(restricoes)
 
         try:
-            query = f"SELECT tombo, tipo, descricao, salaId FROM item WHERE {restricoes_sql} ORDER BY tombo ASC"
+            query = f"SELECT tombo, tipo, descricao, salaId, obs FROM item WHERE {restricoes_sql} ORDER BY tombo ASC"
             cursor.execute(query, parametros)
             resultados = cursor.fetchall()  # Ler todos os resultados
 
@@ -44,8 +44,8 @@ def funcBtBuscar(self):
 
             # Exibir resultados
             for idx, resultado in enumerate(resultados, start=1):
-                tombo, tipo, descricao, salaId = resultado
-                self.lista.insert("", END, iid=idx, text=idx, values=(tombo, tipo, descricao, salaId))
+                tombo, tipo, descricao, salaId, obs = resultado
+                self.lista.insert("", END, iid=idx, text=idx, values=(tombo, tipo, descricao, salaId, obs))
 
             conexao.commit()
 

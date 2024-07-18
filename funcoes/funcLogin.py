@@ -1,7 +1,7 @@
 from modulos import *
 from conexaoBD import *
 
-
+#teste
 
 def show_app(app_instance):
     app_instance.main_app.deiconify()  # Mostrar a janela principal do app

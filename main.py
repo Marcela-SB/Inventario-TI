@@ -92,7 +92,7 @@ class Application:
             font=("Inter Regular", 20 * -1),
             relief="flat", 
             border=2,
-            command=lambda: validarUser(self) #show_app(self)
+            command=lambda: show_app(self) #validarUser(self)
         )
         self.btLogin.place(
             relx = 0.68,

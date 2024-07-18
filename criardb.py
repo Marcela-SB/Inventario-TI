@@ -36,11 +36,12 @@ mycursor.execute("""
 # Criando tabela item
 mycursor.execute("""
     CREATE TABLE IF NOT EXISTS item (
-        tombo CHAR(10) PRIMARY KEY,
-        tipo VARCHAR(20),
-        descricao VARCHAR(50),
-        salaId CHAR(3),
-        FOREIGN KEY (salaId) REFERENCES salas(salaId)
+        tombo CHAR(10) PRIMARY KEY NOT NULL,
+        tipo VARCHAR(20) NOT NULL,
+        descricao VARCHAR(50) DEFAULT NULL,
+        salaId CHAR(3) NOT NULL,
+        FOREIGN KEY (salaId) REFERENCES salas(salaId),
+        obs VARCHAR(50) DEFAULT NULL
     )
 """)
 

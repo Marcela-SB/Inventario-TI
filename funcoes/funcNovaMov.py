@@ -39,41 +39,29 @@ def info(self):
         return False
 
 
-"""def getDados(self):
-    getTombo = self.inputTomboNovMov.get()
-    if(getTombo):
-        try:
-        
-            # Conectar ao banco de dados
-            conexao = conectar_bd(self)
-            cursor = conexao.cursor()
-            querry = "select salaId from inventario.item where tombo = %s"
-            val = tuple(getTombo)
-            cursor.execute(querry, val)
-            ret = cursor.fetchall()
-            return ret
-        except mysql.connector.Error as err:
-            messagebox.showerror("Erro", f"Erro ao criar nova movimentação: {err}")
-        finally:
-            cursor.close()
-            conexao.close()"""
-
 def funcBtCriarNovaMov(self):
     #RECEBENDO DADOS
-    nvmTombo = self.inputTomboNovMov.get()
-    nvmOrigem = self.selOrigem.get()
+    item = []
+    item = info(self)
     nvmDestino = self.selDestino.get()
-    nvmResp = self.selResponsavel.get()
+    nvmResp = config.nameUser
 
-    if(nvmTombo and nvmOrigem and nvmDestino and nvmResp):
+    if(nvmDestino != item[1]):
         try:
-        
+            
             # Conectar ao banco de dados
             conexao = conectar_bd(self)
             cursor = conexao.cursor()
             
-            cursor.execute("INSERT INTO movimentacao (itemID, salaOrigem, salaDestino, data, responsavel) VALUES (%s, %s, %s, %s, %s)", (nvmTombo, nvmOrigem, nvmDestino, datetime.now(), nvmResp))
+            # CRIANDO NOVA MOVIMENTAÇÃO
+            cursor.execute("INSERT INTO movimentacao (itemID, salaOrigem, salaDestino, data, responsavel) VALUES (%s, %s, %s, %s, %s)", (item[0], item[1], nvmDestino, datetime.now(), nvmResp))
             conexao.commit()
+
+            #ALTERANDO SALA ATUAL NO ITEM
+            cursor.execute("UPDATE item SET salaId = %s WHERE tombo = %s", (nvmDestino, item[0]))
+
+            conexao.commit()
+
             messagebox.showinfo("Sucesso", "Movimentação criada com sucesso!")
             
             self.janelinha.destroy()
@@ -84,7 +72,7 @@ def funcBtCriarNovaMov(self):
             cursor.close()
             conexao.close()
     else:
-        messagebox.showerror("ERRO", "Campos em branco, por favor preencher todos!")
+        messagebox.showerror("Erro", f"O item já está nesta sala! ")
 
 
 
