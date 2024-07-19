@@ -11,6 +11,38 @@ import webbrowser
 
 tk.botao = ""
 
+def buscaImpressao(self):
+    tb = self.inputTomboImpr.get()
+    if tb != "":
+        numtb = int(tb)
+
+        if numtb > 10000:
+            conexao = conectar_bd(self)
+            cursor = conexao.cursor()
+
+            try:
+                cursor.execute(f"SELECT tombo, tipo, descricao, salaId, obs FROM item WHERE tombo LIKE '{numtb}%'")
+                resultados = cursor.fetchall()  # Ler todos os resultados
+
+                # Limpar Treeview
+                self.conferindo.delete(*self.conferindo.get_children())
+
+                # Exibir resultados
+                for idx, resultado in enumerate(resultados, start=1):
+                    tombo, tipo, descricao, salaId, obs = resultado
+                    self.conferindo.insert("", tk.END, iid=idx, text=idx, values=(tombo, tipo, descricao, salaId, obs))
+
+                conexao.commit()
+
+            except mysql.connector.Error as err:
+                messagebox.showerror("Erro", f"Erro ao buscar item: {err}")
+            finally:
+                cursor.close()
+                conexao.close()
+        else:
+            # Limpar Treeview
+            self.conferindo.delete(*self.conferindo.get_children())
+
 def funcBtImprQRCode(self):
     messagebox.showinfo("Info", "Botão ImprQRCode")
     #self.btImprQRCode

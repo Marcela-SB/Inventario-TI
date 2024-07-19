@@ -131,10 +131,10 @@ def criarNovaMovimentacao(self):
             relx= 0.125,
             rely= 0.45
         )
-        numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
+        valorSalas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'L', 'M', 'R', 'Q','01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36A', '36B', '38A', '38B', '38C', '38D', '39', '40A', '40B', '40C', '45']
         self.selDestino = ttk.Combobox(
             self.novaMov, 
-            values=numeros, 
+            values=valorSalas, 
             state="readonly", 
             width=10,
         )

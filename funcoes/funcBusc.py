@@ -21,12 +21,12 @@ def funcBtBuscar(self):
         parametros = []
 
         if buscTombo:
-            restricoes.append("tombo = %s")
-            parametros.append(buscTombo)
+            restricoes.append("tombo LIKE %s")
+            parametros.append(f"{buscTombo}%")
         
         if buscItem:
-            restricoes.append("tipo = %s")
-            parametros.append(buscItem)
+            restricoes.append("tipo LIKE %s")
+            parametros.append(f"{buscItem}%")
         
         if buscSala:
             restricoes.append("salaId = %s")
@@ -35,7 +35,8 @@ def funcBtBuscar(self):
         restricoes_sql = " AND ".join(restricoes)
 
         try:
-            query = f"SELECT tombo, tipo, descricao, salaId, obs FROM item WHERE {restricoes_sql} ORDER BY tombo ASC"
+            query = f"""SELECT tombo, tipo, descricao, salaId, obs FROM item WHERE {restricoes_sql} 
+            ORDER BY tombo ASC"""
             cursor.execute(query, parametros)
             resultados = cursor.fetchall()  # Ler todos os resultados
 
@@ -55,7 +56,7 @@ def funcBtBuscar(self):
             cursor.close()
             conexao.close()
     else:
-        messagebox.showerror("ERRO", "Campos em branco, por favor preencher todos!")
+        messagebox.showerror("ERRO", "Campos em branco, por favor preencher!")
 
 
 def funcBtBuscInventario(self):
@@ -81,3 +82,8 @@ def funcBtBuscInventario(self):
     finally:
         cursor.close()
         conexao.close()
+
+    # APAGANDO DOS INPUTS
+        self.inputTomboBusc.delete(0,END)
+        self.inputItemBusc.delete(0,END)
+        self.comboboxBusc.set("")

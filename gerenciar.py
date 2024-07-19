@@ -114,7 +114,7 @@ def gerenciar(self):
     )
     self.inputTomboGer = Entry(self.aba_gerenciar, font=50)
     self.inputTomboGer.place(
-        relx = 0.15,
+        relx = 0.175,
         rely = 0.05,
         relwidth=0.4, 
         height=30
@@ -133,7 +133,7 @@ def gerenciar(self):
     )
     self.inputItemGer = Entry(self.aba_gerenciar, font=50)
     self.inputItemGer.place(
-        relx = 0.15,
+        relx = 0.175,
         rely = 0.127,
         relwidth=0.4, 
         height=30
@@ -152,7 +152,7 @@ def gerenciar(self):
     )
     self.inputDescricaoGer = Entry(self.aba_gerenciar, font=50)
     self.inputDescricaoGer.place(
-        relx = 0.15,
+        relx = 0.175,
         rely = 0.21,
         relwidth=0.4, 
         height=30
@@ -171,19 +171,20 @@ def gerenciar(self):
         relx = 0.05,
         rely = 0.3
     )
+    
 
                                               # LISTA SUSPENSA
-    numeros = [str(i) for i in range(1, 49)]  # Lista de números de 1 a 48
+    valorSalas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'L', 'M', 'R', 'Q','01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36A', '36B', '38A', '38B', '38C', '38D', '39', '40A', '40B', '40C', '45']  
     self.comboboxGer = ttk.Combobox(
         self.aba_gerenciar, 
         textvariable=self.valor_combobox,
-        values=numeros, 
+        values=valorSalas, 
         font=50,
         state="readonly", 
         width=10
     )
     self.comboboxGer.place(
-        relx=0.15, 
+        relx=0.175, 
         rely = 0.31
     )
     style = ttk.Style()
@@ -202,7 +203,7 @@ def gerenciar(self):
     )
     self.inputObsGer = Entry(self.aba_gerenciar, font=50)
     self.inputObsGer.place(
-        relx = 0.15,
+        relx = 0.175,
         rely = 0.41,
         relwidth=0.4, 
         height=30

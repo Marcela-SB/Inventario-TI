@@ -62,13 +62,19 @@ def imprimir(self):
         relx = 0.05,
         rely = 0.05
     )
-    self.inputTomboImpr = Entry(self.aba_imprimir, font=50)
+    self.tombo_var = tk.StringVar()
+    self.inputTomboImpr = Entry(
+        self.aba_imprimir, 
+        font=50, 
+        textvariable=self.tombo_var
+    )
     self.inputTomboImpr.place(
-        relx = 0.25,
+        relx = 0.175,
         rely = 0.05,
         relwidth=0.4, 
         height=30
     )
+    self.tombo_var.trace_add("write", lambda *args: buscaImpressao(self))
 
 # ----------- BOTÕES -----------
     self.btImprQRCode = Button(
@@ -163,7 +169,7 @@ def imprimir(self):
         relx= 0.02, 
         rely=0.25, 
         relwidth=0.95, 
-        relheight=0.1
+        relheight=0.12
     )
 
     # COLUNAS
@@ -184,5 +190,18 @@ def imprimir(self):
         relx= 0.0, 
         rely=0.0, 
         relwidth=1, 
+        relheight=1
+    )
+
+    self.scroolConferir = Scrollbar(
+        self.areaConferir,
+        orient="vertical"
+    )
+    self.conferindo.configure(yscrollcommand= self.scroolConferir.set)
+    self.scroolConferir.config(command=self.conferindo.yview)
+    self.scroolConferir.place(
+        relx=0.98,
+        rely=0.00001, 
+        relwidth=0.02, 
         relheight=1
     )
