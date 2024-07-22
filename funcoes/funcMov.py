@@ -25,7 +25,7 @@ def funcbtBuscarMov(self):
             parametros.append(f"{tbMov}%")
         
         if dataMov:
-            restricoes.append("tipo WHERE %s")
+            restricoes.append("tipo WHERE data = '%s'")
             parametros.append(f"{dataMov}")
         
         if salaMov:

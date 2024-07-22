@@ -46,6 +46,8 @@ def funcBtBuscar(self):
             # Exibir resultados
             for idx, resultado in enumerate(resultados, start=1):
                 tombo, tipo, descricao, salaId, obs = resultado
+                if(obs == ""):
+                    obs = "-"
                 self.lista.insert("", END, iid=idx, text=idx, values=(tombo, tipo, descricao, salaId, obs))
 
             conexao.commit()

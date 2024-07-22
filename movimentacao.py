@@ -1,4 +1,5 @@
 from modulos import *
+from tkcalendar import Calendar
 from novaMovimentacao import *
 from funcoes.funcMov import *
 
@@ -16,7 +17,7 @@ def movimentacao(self):
     )
     self.btNovaMov.place(
         relx= 0.8, 
-        rely=0.055, 
+        rely=0.175, 
         width=180, 
         height=61
     )
@@ -33,11 +34,41 @@ def movimentacao(self):
         command=lambda: funcbtBuscarMov(self)
     )
     self.btBuscarMov.place(
-        relx= 0.62, 
-        rely=0.055, 
+        relx= 0.8, 
+        rely=0.04, 
         width=180, 
         height=61
     )
+
+
+    self.radio_var = tk.BooleanVar(value=False)
+    self.btSelCalendMov = Button(
+        self.aba_movimentacao,
+        bg= "#ff9999",
+        fg= "black",
+        text="não considerar",
+        font=("Inter Regular", 14 * -1),
+        relief="flat", 
+        border=2,
+        command=lambda: funcbtSelCalendMov(self)
+    )
+    self.btSelCalendMov.place(
+        relx= 0.175, 
+        rely=0.21, 
+        width=100, 
+        height=31
+    )
+    
+    def funcbtSelCalendMov(self):
+        estadoAtual = self.radio_var.get()
+        novoEstado = not estadoAtual
+        self.radio_var.set(novoEstado)
+
+        if self.btSelCalendMov.config('text')[-1] == 'considerar':
+            self.btSelCalendMov.config(text='não considerar', bg="#ff9999")
+        else:
+            self.btSelCalendMov.config(text='considerar', bg="#c5ff99")
+        #print(novoEstado)
 
 
 # ----------- LABELS E INPUTS ----------- 
@@ -69,14 +100,17 @@ def movimentacao(self):
     )
     self.lbDataMov.place(
         relx = 0.05,
-        rely = 0.125
+        rely = 0.21
     )
-    self.inputDataMov = Entry(self.aba_movimentacao, font=50)
-    self.inputDataMov.place(
-        relx = 0.175,
+    
+    # Widget do calendário
+    self.cal = Calendar(self.aba_movimentacao, selectmode='day', date_pattern='yyyy-mm-dd')
+    self.cal.pack(pady=5)
+    self.cal.place(
+        relx = 0.4,
         rely = 0.127,
-        relwidth=0.4, 
-        height=30
+        height = 150,
+        width = 200
     )
 
     self.lbSalaMov = Label(           # SALA
@@ -88,7 +122,7 @@ def movimentacao(self):
     )
     self.lbSalaMov.place(
         relx = 0.05,
-        rely = 0.21
+        rely = 0.125
     )
 
                                             # LISTA SUSPENSA
@@ -101,7 +135,8 @@ def movimentacao(self):
     )
     self.comboboxMov.place(
         relx=0.175, 
-        rely = 0.21
+        rely = 0.125,
+        width= 140
     )
 
 # ----------- TABELA DE MOVIMENTAÇÃO -----------  
@@ -109,9 +144,9 @@ def movimentacao(self):
     self.areamovimentacao = Frame(self.aba_movimentacao, bg="#D9D9D9")
     self.areamovimentacao.place(
         relx= 0.02, 
-        rely=0.3, 
+        rely=0.37, 
         relwidth=0.95, 
-        relheight=0.67
+        relheight=0.6
     )
 
     # COLUNAS

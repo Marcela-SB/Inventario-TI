@@ -37,8 +37,6 @@ class Application:
 
         
 
-
-
 # LABELS
         self.lbLogin = Label( 
             self.root, 
@@ -100,6 +98,8 @@ class Application:
             height= 35,
             width= 80
         )
+        # FUNÇÃO PARA ACIONAR BOTÃO AO APERTAR "ENTER"
+        self.root.bind('<Return>', lambda event: show_app(self))
 
         # Botão para adicionar novos Users
         self.btNovoUser = Button(

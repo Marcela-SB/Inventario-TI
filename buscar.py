@@ -2,6 +2,43 @@ from modulos import *
 from funcoes.funcBusc import *
 
 def buscar(self):
+# ----------- BOTÕES -----------         
+    self.btBuscarBusc = Button(
+        self.aba_buscar,
+        bg= "#347deb",
+        fg= "#FFFFFF",
+        text="Buscar",
+        font=("Inter Regular", 24 * -1),
+        relief="flat", 
+        border=2,
+        command=lambda: funcBtBuscar(self)
+    )
+    self.btBuscarBusc.place(
+        relx= 0.8, 
+        rely=0.04, 
+        width=180, 
+        height=61
+    )
+
+    self.btBuscInventario = Button(
+        self.aba_buscar,
+        bg= "purple",
+        fg= "#FFFFFF",
+        text="Inventário\nCompleto",
+        font=("Inter Regular", 24 * -1),
+        relief="flat", 
+        border=2,
+        command=lambda: funcBtBuscInventario(self)
+    )
+    self.btBuscInventario.place(
+        relx= 0.8, 
+        rely=0.175, 
+        width=180, 
+        height=61
+    )
+
+
+
 # ----------- LABELS E INPUTS ----------- 
     self.lbTomboBusc = Label(           # TOMBO
         self.aba_buscar, 
@@ -66,40 +103,6 @@ def buscar(self):
         rely = 0.21
     )
 
-# ----------- BOTÕES -----------         
-    self.btBuscarBusc = Button(
-        self.aba_buscar,
-        bg= "#347deb",
-        fg= "#FFFFFF",
-        text="Buscar",
-        font=("Inter Regular", 24 * -1),
-        relief="flat", 
-        border=2,
-        command=lambda: funcBtBuscar(self)
-    )
-    self.btBuscarBusc.place(
-        relx= 0.8, 
-        rely=0.04, 
-        width=180, 
-        height=61
-    )
-
-    self.btBuscInventario = Button(
-        self.aba_buscar,
-        bg= "purple",
-        fg= "#FFFFFF",
-        text="Inventário\nCompleto",
-        font=("Inter Regular", 24 * -1),
-        relief="flat", 
-        border=2,
-        command=lambda: funcBtBuscInventario(self)
-    )
-    self.btBuscInventario.place(
-        relx= 0.8, 
-        rely=0.175, 
-        width=180, 
-        height=61
-    )
 
 
 # ----------- TABELA DE BUSCA -----------  
