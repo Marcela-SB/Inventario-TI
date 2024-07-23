@@ -21,4 +21,4 @@ def NivelUser(nivel):
 
 def alterarBt(ent):
     global bt
-    config.bt = ent
+    config.bt = str(ent)

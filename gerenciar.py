@@ -1,7 +1,12 @@
 from modulos import *
 from funcoes.funcGeren import *
+from config import bt
+
+Vbt = config.bt
 
 def gerenciar(self):
+    print("GEN" + Vbt)
+    global bt
     
     self.separator1 = Frame(         # SEPARADOR 1
         self.aba_gerenciar, 
@@ -27,22 +32,42 @@ def gerenciar(self):
 
 
 # ----------- BOTÕES -----------         
-    self.btAdicionar = Button(
-        self.aba_gerenciar,
-        bg= "#2EC27B",
-        fg= "#FFFFFF",
-        text="Adicionar",
-        font=("Inter Regular", 24 * -1),
-        relief="flat", 
-        border=2,
-        command=lambda: funcBtAdicionar(self)
-    )
-    self.btAdicionar.place(
-        relx= 0.8, 
-        rely=0.1, 
-        width=180, 
-        height=61
-    )
+    if (Vbt == "add"):
+        print(Vbt)
+        self.btAdicionar = Button(
+            self.aba_gerenciar,
+            bg= "#2EC27B",
+            fg= "#FFFFFF",
+            text="Adicionar",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: funcBtAdicionar(self)
+        )
+        self.btAdicionar.place(
+            relx= 0.8, 
+            rely=0.1, 
+            width=180, 
+            height=61
+        )
+    if(Vbt == "edit"):
+        print(Vbt)
+        self.btEditar = Button(
+            self.aba_gerenciar,
+            bg= "blue",
+            fg= "#FFFFFF",
+            text="Editar",
+            font=("Inter Regular", 24 * -1),
+            relief="flat", 
+            border=2,
+            command=lambda: funcBtEditar(self)
+        )
+        self.btEditar.place(
+            relx= 0.8, 
+            rely=0.1, 
+            width=180, 
+            height=61
+        )
     
     self.btExcluir = Button(
         self.aba_gerenciar,
