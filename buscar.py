@@ -95,7 +95,8 @@ def buscar(self):
     self.comboboxBusc = ttk.Combobox(
         self.aba_buscar, 
         values=valorSalas, 
-        state="readonly", 
+        state="readonly",
+        font=50, 
         width=10,
     )
     self.comboboxBusc.place(
@@ -124,7 +125,7 @@ def buscar(self):
     self.lista.heading("#0", text="#")
     self.lista.heading("#1", text="TOMBO")
     self.lista.heading("#2", text="ITEM")
-    self.lista.heading("#3", text="DETALHAMENTO")
+    self.lista.heading("#3", text="DESCRIÇÃO")
     self.lista.heading("#4", text="LOCALIZAÇÃO")
     self.lista.heading("#5", text="OBS")
 
@@ -155,3 +156,4 @@ def buscar(self):
         relheight=1
     )
 
+    self.lista.bind("<Double-1>", lambda event: cliqueDuploBusc(self))

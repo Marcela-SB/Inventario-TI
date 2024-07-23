@@ -169,7 +169,7 @@ def imprimir(self):
         relx= 0.02, 
         rely=0.25, 
         relwidth=0.95, 
-        relheight=0.12
+        relheight=0.17
     )
 
     # COLUNAS
@@ -180,7 +180,7 @@ def imprimir(self):
     )
     self.conferindo.heading("#1", text="TOMBO")
     self.conferindo.heading("#2", text="ITEM")
-    self.conferindo.heading("#3", text="DETALHAMENTO")
+    self.conferindo.heading("#3", text="DESCRIÇÃO")
     self.conferindo.heading("#4", text="LOCALIZAÇÃO")
     self.conferindo.heading("#5", text="OBS")
 
@@ -205,3 +205,5 @@ def imprimir(self):
         relwidth=0.02, 
         relheight=1
     )
+
+    self.conferindo.bind("<Double-1>", lambda event: cliqueDuploImpr(self))

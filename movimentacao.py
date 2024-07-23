@@ -55,7 +55,7 @@ def movimentacao(self):
     self.btSelCalendMov.place(
         relx= 0.175, 
         rely=0.21, 
-        width=100, 
+        width=140, 
         height=31
     )
     
@@ -104,8 +104,11 @@ def movimentacao(self):
     )
     
     # Widget do calendário
-    self.cal = Calendar(self.aba_movimentacao, selectmode='day', date_pattern='yyyy-mm-dd')
-    self.cal.pack(pady=5)
+    self.cal = Calendar(
+        self.aba_movimentacao, 
+        selectmode='day', 
+        date_pattern='yyyy-mm-dd'
+    )
     self.cal.place(
         relx = 0.4,
         rely = 0.127,
@@ -131,6 +134,7 @@ def movimentacao(self):
         self.aba_movimentacao, 
         values=valorSalas, 
         state="readonly", 
+        font=50,
         width=10,
     )
     self.comboboxMov.place(

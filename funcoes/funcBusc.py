@@ -3,6 +3,26 @@ from conexaoBD import *
 
 tk.botao = ""
 
+def cliqueDuploBusc(self):
+    self.inputTomboGer.delete(0,END)
+    self.inputItemGer.delete(0, END)
+    self.inputDescricaoGer.delete(0,END)
+    self.valor_combobox.set("")
+    self.inputObsGer.delete(0,END)
+
+    self.lista.selection()
+
+    for n in self.lista.selection():   
+        colunas = self.lista.item(n, 'values')
+        self.inputTomboGer.insert(END, colunas[0])
+        self.inputItemGer.insert(END, colunas[1])
+        self.inputDescricaoGer.insert(END, colunas[2])
+        self.valor_combobox.set(colunas[3])
+        self.inputObsGer.insert(END, colunas[4])
+        
+    self.after(250, self.notebook.select(self.aba_gerenciar))
+
+
 
 def funcBtBuscar(self):
     # CONECTANDO O BD E INICIALIZANDO CURSOR
@@ -43,12 +63,17 @@ def funcBtBuscar(self):
             # Limpar Treeview
             self.lista.delete(*self.lista.get_children())
 
-            # Exibir resultados
-            for idx, resultado in enumerate(resultados, start=1):
-                tombo, tipo, descricao, salaId, obs = resultado
-                if(obs == ""):
-                    obs = "-"
-                self.lista.insert("", END, iid=idx, text=idx, values=(tombo, tipo, descricao, salaId, obs))
+            
+            if not resultados:
+                #self.lista.insert("", END, iid=0, text="", values=("", "", "Resultado não encontrado", "", ""))
+                messagebox.showwarning("Não existe", "Item buscado não existe.")
+            else:
+                # Exibir resultados
+                for idx, resultado in enumerate(resultados, start=1):
+                    tombo, tipo, descricao, salaId, obs = resultado
+                    if(obs == ""):
+                        obs = "-"
+                    self.lista.insert("", END, iid=idx, text=idx, values=(tombo, tipo, descricao, salaId, obs))
 
             conexao.commit()
 

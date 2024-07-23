@@ -18,3 +18,7 @@ def responsa(nome):
 def NivelUser(nivel):
     global acessNv
     config.acessNv = nivel
+
+def alterarBt(ent):
+    global bt
+    config.bt = ent

@@ -2,3 +2,5 @@
 nameUser = ""
 
 acessNv = "basico"
+
+bt = "add"

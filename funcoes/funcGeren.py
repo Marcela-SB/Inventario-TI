@@ -47,6 +47,7 @@ def funcBtExcluir(self):
 
 #///////////////////////////////////////////////////////
 def funcBtAdicionar(self):
+    print("btadc")
     #CONECTANDO O BD E INICIALIZANDO CURSOR
     conexao = conectar_bd(self)
     cursor = conexao.cursor()
@@ -108,3 +109,13 @@ def show_info():
         messagebox.showinfo("Adicionado", "Item adicionado ao Inventário com sucesso!")
     elif(tk.botao=="EX"):
         messagebox.showinfo("Excluido", "Item excluido do Inventário com sucesso!")'''
+
+def funcBtEditar(self):
+    print("Btedit")
+    # APAGANDO DOS INPUTS
+    self.inputTomboGer.delete(0,END)
+    self.inputItemGer.delete(0, END)
+    self.inputDescricaoGer.delete(0,END)
+    self.valor_combobox.set("")
+    self.inputObsGer.delete(0,END)
+    alterarBt("add")

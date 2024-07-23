@@ -11,6 +11,13 @@ import webbrowser
 
 tk.botao = ""
 
+def cliqueDuploImpr(self):
+    self.inputTomboImpr.delete(0,END)
+    self.conferindo.selection()
+    for n in self.conferindo.selection():   
+        colunas = self.conferindo.item(n, 'values')
+        self.inputTomboImpr.insert(END, colunas[0])
+
 def buscaImpressao(self):
     tb = self.inputTomboImpr.get()
     if tb != "":
@@ -30,6 +37,8 @@ def buscaImpressao(self):
                 # Exibir resultados
                 for idx, resultado in enumerate(resultados, start=1):
                     tombo, tipo, descricao, salaId, obs = resultado
+                    if(obs=="" or obs==None):
+                        obs = "-"
                     self.conferindo.insert("", tk.END, iid=idx, text=idx, values=(tombo, tipo, descricao, salaId, obs))
 
                 conexao.commit()
