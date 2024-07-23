@@ -1,6 +1,6 @@
 from modulos import *
 from funcoes.funcNovaMov import *
-
+from config import nameUser
 
 def criarNovaMovimentacao(self):
     global nameUser

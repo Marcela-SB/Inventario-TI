@@ -90,7 +90,7 @@ class Application:
             font=("Inter Regular", 20 * -1),
             relief="flat", 
             border=2,
-            command=lambda: show_app(self) #validarUser(self)
+            command=lambda: validarUser(self)
         )
         self.btLogin.place(
             relx = 0.68,
@@ -99,7 +99,7 @@ class Application:
             width= 80
         )
         # FUNÇÃO PARA ACIONAR BOTÃO AO APERTAR "ENTER"
-        self.root.bind('<Return>', lambda event: show_app(self))
+        self.root.bind('<Return>', lambda event: validarUser(self))
 
         # Botão para adicionar novos Users
         self.btNovoUser = Button(

@@ -4,6 +4,9 @@ from conexaoBD import *
 tk.botao = ""
 
 def cliqueDuploBusc(self):
+    global bt
+    alterarBt("edit")
+    print(config.bt)
     self.inputTomboGer.delete(0,END)
     self.inputItemGer.delete(0, END)
     self.inputDescricaoGer.delete(0,END)
@@ -19,9 +22,9 @@ def cliqueDuploBusc(self):
         self.inputDescricaoGer.insert(END, colunas[2])
         self.valor_combobox.set(colunas[3])
         self.inputObsGer.insert(END, colunas[4])
-        
-    self.after(250, self.notebook.select(self.aba_gerenciar))
 
+    
+    self.after(250, self.notebook.select(self.aba_gerenciar))
 
 
 def funcBtBuscar(self):
@@ -91,16 +94,20 @@ def funcBtBuscInventario(self):
     conexao = conectar_bd(self)
     cursor = conexao.cursor()
     try:
-        cursor.execute(f"SELECT tombo, tipo, descricao, salaId FROM item ORDER BY tombo ASC")
+        cursor.execute(f"SELECT tombo, tipo, descricao, salaId, obs FROM item ORDER BY tombo ASC")
         resultados = cursor.fetchall()  # Ler todos os resultados
 
         # Limpar Treeview
         self.lista.delete(*self.lista.get_children())
 
         # Exibir resultados
+
         for idx, resultado in enumerate(resultados, start=1):
-            tombo, tipo, descricao, salaId = resultado
-            self.lista.insert("", END, iid=idx, text=idx, values=(tombo, tipo, descricao, salaId))
+            tombo, tipo, descricao, salaId, obs = resultado
+            if(obs == "" or None):
+                obs = "-"
+            self.lista.insert("", END, iid=idx, text=idx, values=(tombo, tipo, descricao, salaId, obs))
+
 
         conexao.commit()
 

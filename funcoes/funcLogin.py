@@ -49,7 +49,7 @@ def getAcesso(self, user):
 def validarUser(self):
     global nameUser
     user = self.inputLogin.get()
-    getAcesso(self, user)
+    
     pw = self.inputSenha.get()
     
     if(user and pw):
@@ -69,12 +69,8 @@ def validarUser(self):
             if (existe == False):
                 messagebox.showwarning("Erro", "Usuário não encontrado!") 
         finally:
+            getAcesso(self, user)
             cursor.close()
             conexao.close()
     else:
         messagebox.showwarning("Erro", "Campos em branco! Por favor, preencha todos!")
-'''def chamarConexao(self):
-        iniciar = None
-        while(iniciar == None):
-            iniciar = conectar_bd(self)'''
-
