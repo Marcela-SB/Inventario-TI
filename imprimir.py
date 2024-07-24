@@ -62,11 +62,15 @@ def imprimir(self):
         relx = 0.05,
         rely = 0.05
     )
+    
+    comandoValidacao = self.register(validarEntrada)
     self.tombo_var = tk.StringVar()
     self.inputTomboImpr = Entry(
         self.aba_imprimir, 
         font=50, 
-        textvariable=self.tombo_var
+        validate= "key",
+        textvariable=self.tombo_var, 
+        validatecommand=(comandoValidacao, '%d', '%P')
     )
     self.inputTomboImpr.place(
         relx = 0.175,

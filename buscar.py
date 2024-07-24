@@ -51,7 +51,13 @@ def buscar(self):
         relx = 0.05,
         rely = 0.05
     )
-    self.inputTomboBusc = Entry(self.aba_buscar, font=50)
+    comandoValidacao = self.register(validarEntrada)
+    self.inputTomboBusc = Entry(
+        self.aba_buscar, 
+        font=50, 
+        validate="key", 
+        validatecommand=(comandoValidacao, '%d', '%P')
+    )
     self.inputTomboBusc.place(
         relx = 0.175,
         rely = 0.05,
@@ -91,7 +97,7 @@ def buscar(self):
     )
 
                                             # LISTA SUSPENSA
-    valorSalas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'L', 'M', 'R', 'Q','01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36A', '36B', '38A', '38B', '38C', '38D', '39', '40A', '40B', '40C', '45'] 
+    valorSalas = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'L', 'M', 'R', 'Q','01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36A', '36B', '38A', '38B', '38C', '38D', '39', '40A', '40B', '40C', '45'] 
     self.comboboxBusc = ttk.Combobox(
         self.aba_buscar, 
         values=valorSalas, 

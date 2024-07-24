@@ -83,7 +83,13 @@ def movimentacao(self):
         relx = 0.05,
         rely = 0.05
     )
-    self.inputTomboMov = Entry(self.aba_movimentacao, font=50)
+    comandoValidacao = self.register(validarEntrada)
+    self.inputTomboMov = Entry(
+        self.aba_movimentacao, 
+        font=50, 
+        validate="key", 
+        validatecommand=(comandoValidacao, '%d', '%P')
+    )
     self.inputTomboMov.place(
         relx = 0.175,
         rely = 0.05,
@@ -129,9 +135,12 @@ def movimentacao(self):
     )
 
                                             # LISTA SUSPENSA
-    valorSalas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'L', 'M', 'R', 'Q','01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36A', '36B', '38A', '38B', '38C', '38D', '39', '40A', '40B', '40C', '45']
+    valorSalas = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'L', 'M', 'R', 'Q','01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36A', '36B', '38A', '38B', '38C', '38D', '39', '40A', '40B', '40C', '45']
+
+    self.valor_comboboxMov = tk.StringVar()
     self.comboboxMov = ttk.Combobox(
         self.aba_movimentacao, 
+        textvariable=self.valor_comboboxMov,
         values=valorSalas, 
         state="readonly", 
         font=50,
@@ -199,3 +208,5 @@ def movimentacao(self):
         relwidth=0.02, 
         relheight=1
     )
+
+    self.entradas.bind("<Double-1>", lambda event: cliqueDuploMov(self))

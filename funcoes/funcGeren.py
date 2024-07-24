@@ -29,7 +29,7 @@ def funcBtExcluir(self):
                     self.inputTomboGer.delete(0,END)
                     self.inputItemGer.delete(0, END)
                     self.inputDescricaoGer.delete(0,END)
-                    self.valor_combobox.set("")
+                    self.valor_comboboxGer.set("")
                     self.inputObsGer.delete(0,END)
 
                 except mysql.connector.Error as err:
@@ -67,25 +67,37 @@ def funcBtAdicionar(self):
         
         # Verifica se o item já existe
         if verificarItem(self, adicTombo):
-            if not messagebox.askyesno("Item existente", "Item já existe, deseja sobrescrever?"):
+            if messagebox.askyesno("Item existente", "Item já existe, deseja sobrescrever?\n(a SALA ATUAL não será alterada)"):
+                try:
+                    cursor.execute("UPDATE item SET tombo = %s, tipo = %s, descricao = %s, obs = %s WHERE tombo = %s", (adicTombo, adicItem, adicDescricao, adicObs, adicTombo))
+                    conexao.commit()
+                    messagebox.showinfo("Sucesso", "Item atualizado com sucesso!")
+                except mysql.connector.Error as err:
+                    messagebox.showerror("Erro", f"Erro ao adicionar item: {err}")
+                finally:
+                    cursor.close()
+                    conexao.close()
+            else:
                 return  # Cancela a adição se o usuário não deseja sobrescrever
-        try:
-            cursor.execute("INSERT INTO item (tombo, tipo, descricao, salaId, obs) VALUES (%s, %s, %s, %s, %s)", (adicTombo, adicItem, adicDescricao, adicSala, adicObs))
-            conexao.commit()
-            messagebox.showinfo("Sucesso", "Item adicionado com sucesso!")
-    
-            # APAGANDO DOS INPUTS
-            self.inputTomboGer.delete(0,END)
-            self.inputItemGer.delete(0, END)
-            self.inputDescricaoGer.delete(0,END)
-            self.valor_combobox.set("")
-            self.inputObsGer.delete(0,END)
+        # SE NÃO EXISTIR, ADICIONA O ITEM
+        else:
+            try:
+                cursor.execute("INSERT INTO item (tombo, tipo, descricao, salaId, obs) VALUES (%s, %s, %s, %s, %s)", (adicTombo, adicItem, adicDescricao, adicSala, adicObs))
+                conexao.commit()
+                messagebox.showinfo("Sucesso", "Item adicionado com sucesso!")
+        
+                # APAGANDO DOS INPUTS
+                self.inputTomboGer.delete(0,END)
+                self.inputItemGer.delete(0, END)
+                self.inputDescricaoGer.delete(0,END)
+                self.valor_comboboxGer.set("")
+                self.inputObsGer.delete(0,END)
 
-        except mysql.connector.Error as err:
-            messagebox.showerror("Erro", f"Erro ao adicionar item: {err}")
-        finally:
-            cursor.close()
-            conexao.close()
+            except mysql.connector.Error as err:
+                messagebox.showerror("Erro", f"Erro ao adicionar item: {err}")
+            finally:
+                cursor.close()
+                conexao.close()
 
     else:
         messagebox.showerror("ERRO", "Campos em branco, por favor preencher todos!")
@@ -116,6 +128,6 @@ def funcBtEditar(self):
     self.inputTomboGer.delete(0,END)
     self.inputItemGer.delete(0, END)
     self.inputDescricaoGer.delete(0,END)
-    self.valor_combobox.set("")
+    self.valor_comboboxGer.set("")
     self.inputObsGer.delete(0,END)
     alterarBt("add")

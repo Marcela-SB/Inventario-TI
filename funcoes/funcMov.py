@@ -3,6 +3,18 @@ from conexaoBD import *
 
 tk.botao = ""
 
+def cliqueDuploMov(self):
+    print(config.bt)
+    self.inputTomboMov.delete(0,END)
+    self.valor_comboboxMov.set("")
+
+    self.entradas.selection()
+
+    for n in self.entradas.selection():   
+        colunas = self.entradas.item(n, 'values')
+        self.inputTomboMov.insert(END, colunas[0])
+        self.radio_var.set(False)
+        self.btSelCalendMov.config(text='não considerar', bg="#ff9999")
 
 def funcbtBuscarMov(self):
     # CONECTANDO O BD E INICIALIZANDO CURSOR

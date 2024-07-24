@@ -10,7 +10,7 @@ def cliqueDuploBusc(self):
     self.inputTomboGer.delete(0,END)
     self.inputItemGer.delete(0, END)
     self.inputDescricaoGer.delete(0,END)
-    self.valor_combobox.set("")
+    self.valor_comboboxGer.set("")
     self.inputObsGer.delete(0,END)
 
     self.lista.selection()
@@ -20,7 +20,7 @@ def cliqueDuploBusc(self):
         self.inputTomboGer.insert(END, colunas[0])
         self.inputItemGer.insert(END, colunas[1])
         self.inputDescricaoGer.insert(END, colunas[2])
-        self.valor_combobox.set(colunas[3])
+        self.valor_comboboxGer.set(colunas[3])
         self.inputObsGer.insert(END, colunas[4])
 
     

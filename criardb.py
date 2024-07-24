@@ -36,7 +36,7 @@ mycursor.execute("""
 # Criando tabela item
 mycursor.execute("""
     CREATE TABLE IF NOT EXISTS item (
-        tombo CHAR(10) PRIMARY KEY NOT NULL,
+        tombo INT(12) PRIMARY KEY NOT NULL,
         tipo VARCHAR(20) NOT NULL,
         descricao VARCHAR(50) DEFAULT NULL,
         salaId CHAR(3) NOT NULL,
@@ -45,17 +45,18 @@ mycursor.execute("""
     )
 """)
 
-# Criando tabela movimentação
+# Criando tabela movimentacao
 mycursor.execute("""
     CREATE TABLE IF NOT EXISTS movimentacao (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        itemID CHAR(10),
+        itemID INT(12),
         FOREIGN KEY (itemID) REFERENCES item(tombo),
         salaOrigemId CHAR(3),
         FOREIGN KEY (salaOrigemId) REFERENCES salas(salaId),
         salaDestino CHAR(3),
         FOREIGN KEY (salaDestino) REFERENCES salas(salaId),
         data DATE,
+        hora TIME,
         responsavel VARCHAR(50)
     )
 """)
@@ -71,6 +72,10 @@ mycursor.execute("""
     ALTER TABLE tab 
     DROP COLUMN c1
 """)'''
+
+# Alterar coluna 'c1' da tabela 'tab'
+'''mycursor.execute("""ALTER TABLE tab 
+MODIFY COLUMN c1 TipoDados(?);""")'''
 
 # Fecha a conexão
 mydb.close()
