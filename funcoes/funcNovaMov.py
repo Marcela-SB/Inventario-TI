@@ -54,13 +54,16 @@ def funcBtCriarNovaMov(self):
             cursor = conexao.cursor()
             
             # CRIANDO NOVA MOVIMENTAÇÃO
-            cursor.execute("INSERT INTO movimentacao (itemID, salaOrigem, salaDestino, data, responsavel) VALUES (%s, %s, %s, %s, %s)", (item[0], item[1], nvmDestino, datetime.now(), nvmResp))
+            cursor.execute("INSERT INTO movimentacao (itemID, salaOrigem, salaDestino, data, hora, responsavel) VALUES (%s, %s, %s, %s, %s, %s)", (item[0], item[1], nvmDestino, datetime.now().date(), datetime.now().time(), nvmResp))
             conexao.commit()
 
             #ALTERANDO SALA ATUAL NO ITEM
             cursor.execute("UPDATE item SET salaId = %s WHERE tombo = %s", (nvmDestino, item[0]))
 
             conexao.commit()
+
+            # Limpar Treeview
+            self.entradas.delete(*self.entradas.get_children())
 
             messagebox.showinfo("Sucesso", "Movimentação criada com sucesso!")
             

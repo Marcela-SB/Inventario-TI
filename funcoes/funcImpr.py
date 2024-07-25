@@ -9,6 +9,8 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import SimpleDocTemplate, Image
 import webbrowser
 
+from tkinter.filedialog import asksaveasfilename
+
 tk.botao = ""
 
 def cliqueDuploImpr(self):
@@ -72,24 +74,38 @@ def funcBtImprDetal(self):
     existe = verificarItem(self, tbImpr)
     
     if existe:
-        def printRelatorio(self):
-            webbrowser.open("Relatório_de_Item.pdf")
+        def printRelatorio(self, caminho_arquivo):
+            webbrowser.open(caminho_arquivo)
 
         def gerarRelatorio(self):
             try:
+                # Nome padrão para o arquivo
+                nome_padrao_arquivo = f"Detalhamento_de_Item_{tbImpr}.pdf"
+
+                # Obter o local para salvar o arquivo
+                caminho_arquivo = asksaveasfilename(
+                    defaultextension=".pdf", 
+                    filetypes=[("PDF files", "*.pdf")],
+                    title="Salvar relatório como",
+                    initialfile=nome_padrao_arquivo
+                )
+                if not caminho_arquivo:
+                    #messagebox.showwarning("Operação Cancelada", "Salvamento do relatório cancelado.")
+                    return False
+                
                 # Conectar ao banco de dados
                 conexao2 = conectar_bd(self)
                 cursor2 = conexao2.cursor()
 
                 # Consultar detalhes do item
-                cursor2.execute("SELECT tombo, tipo, descricao, salaId FROM item WHERE tombo = %s", (tbImpr,))
+                cursor2.execute("SELECT tombo, tipo, descricao, salaId, obs FROM item WHERE tombo = %s", (tbImpr,))
                 item = cursor2.fetchone()  # Consumir o resultado da consulta
                 if not item:
                     messagebox.showerror("Erro", "Item não encontrado.")
                     return False
 
                 # Gerar o relatório em PDF
-                self.r = canvas.Canvas("Relatório_de_Item.pdf")
+                self.r = canvas.Canvas(caminho_arquivo)
 
                 self.r.setFont("Helvetica-Bold", 24)
                 self.r.drawString(200, 780, f"Relatório de Item")
@@ -106,13 +122,15 @@ def funcBtImprDetal(self):
                     self.r.drawString(100, 670, f"Sala: {item[3]}")
                     self.r.drawString(150, 650, f"- Função: {sala[0]}")
                     self.r.drawString(150, 630, f"- Prédio: {sala[1]}")
+                    self.r.drawString(100, 610, f"OBS: {item[4]}")
                 else:
                     self.r.drawString(100, 670, f"Sala não encontrada para salaId: {item[3]}")
+                    self.r.drawString(100, 650, f"OBS: {item[4]}")
 
                 # Salvar e fechar o PDF
                 self.r.showPage()
                 self.r.save()
-                printRelatorio(self)
+                printRelatorio(self, caminho_arquivo)
                 messagebox.showinfo("Relatório Gerado", "Relatório gerado com sucesso.")
 
             except mysql.connector.Error as err:
