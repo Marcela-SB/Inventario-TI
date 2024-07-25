@@ -48,11 +48,11 @@ def funcbtBuscarMov(self):
         restricoes_sql = " AND ".join(restricoes)
 
         try:            
-            query = f"""SELECT m.itemID, i.tipo, m.salaOrigem, m.salaDestino, m.data, m.responsavel 
+            query = f"""SELECT m.itemID, i.tipo, m.salaOrigem, m.salaDestino, m.data, m.hora, m.responsavel 
             FROM movimentacao m
             JOIN item i ON m.itemID = i.tombo 
             WHERE {restricoes_sql} 
-            ORDER BY m.data ASC"""
+            ORDER BY m.data ASC, i.tombo ASC"""
             cursor.execute(query, parametros)
             resultados = cursor.fetchall()  # Ler todos os resultados
 
@@ -66,8 +66,8 @@ def funcbtBuscarMov(self):
             else:
             # Exibir resultados
                 for idx, resultado in enumerate(resultados, start=1):
-                    tombo, tipo, salaOrigem, salaDestino, data, responsavel = resultado
-                    self.entradas.insert("", END, iid=idx, text=idx, values=(tombo, tipo, salaOrigem, salaDestino, data, "hh:mm", responsavel))
+                    tombo, tipo, salaOrigem, salaDestino, data, hora, responsavel = resultado
+                    self.entradas.insert("", END, iid=idx, text=idx, values=(tombo, tipo, salaOrigem, salaDestino, data, hora, responsavel))
 
 
             conexao.commit()
