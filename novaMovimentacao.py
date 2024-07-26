@@ -137,6 +137,7 @@ def criarNovaMovimentacao(self):
             values=valorSalas, 
             state="readonly", 
             width=10,
+            font=50
         )
         self.selDestino.place(
             relx=0.5, 

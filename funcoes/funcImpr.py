@@ -3,10 +3,13 @@ from funcoes.bdBuscar import *
 from conexaoBD import *
 # MODULOS IMPRESSÃO
 from reportlab.pdfgen import canvas
+from reportlab.lib import colors
+from reportlab.lib.units import cm      #importa tabelas
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import SimpleDocTemplate, Image
+from reportlab.platypus import SimpleDocTemplate, Image, Table, TableStyle, Paragraph, Spacer
 import webbrowser
 
 from tkinter.filedialog import asksaveasfilename
@@ -71,18 +74,13 @@ def funcBtImprCodigoBarras(self):
 
 
 def funcBtImprMov(self):
-    messagebox.showinfo("Info", "Botão ImprMov")
-    #self.btImprMov
     tbImpr = str(self.inputTomboImpr.get())
     existe = verificarItem(self, tbImpr)
     
     if existe:
         def gerarRelatorioMov(self):
             try:
-                # Nome padrão para o arquivo
-                nome_padrao_arquivo = f"Detalhamento_de_Item_{tbImpr}.pdf"
-
-                # Obter o local para salvar o arquivo
+                nome_padrao_arquivo = f"Movimentações_de_Item_{tbImpr}.pdf"
                 caminho_arquivo = asksaveasfilename(
                     defaultextension=".pdf", 
                     filetypes=[("PDF files", "*.pdf")],
@@ -90,34 +88,67 @@ def funcBtImprMov(self):
                     initialfile=nome_padrao_arquivo
                 )
                 if not caminho_arquivo:
-                    #messagebox.showwarning("Operação Cancelada", "Salvamento do relatório cancelado.")
                     return False
                 
-                # Conectar ao banco de dados
                 conexao2 = conectar_bd(self)
                 cursor2 = conexao2.cursor()
 
-                # Consultar detalhes do item
-                cursor2.execute("""SELECT salaOrigem, salaDestino, data, hora, responsavel FROM movimentacao WHERE tombo = %s
-                ORDER BY data ASC, hora ASC""", (tbImpr,))
-                item = cursor2.fetchone()  # Consumir o resultado da consulta
-                if not item:
+                cursor2.execute("""SELECT salaOrigem, salaDestino, data, hora, responsavel 
+                                   FROM movimentacao 
+                                   WHERE itemID = %s
+                                   ORDER BY data ASC, hora ASC""", (tbImpr,))
+                itens = cursor2.fetchall()
+                if not itens:
                     messagebox.showerror("Erro", "Item não encontrado.")
                     return False
 
-                # Gerar o relatório em PDF
-                self.r = canvas.Canvas(caminho_arquivo)
+                # PREPARANDO O DOCUMENTO
+                doc = SimpleDocTemplate(caminho_arquivo, pagesize=A4)
+                elementos = []
 
-                self.r.setFont("Helvetica-Bold", 24)
-                self.r.drawString(200, 780, f"Relatório de Item")
-                
-                self.r.setFont("Helvetica", 16)
-                self.r.drawString(100, 730, f"Tombo: {item[0]}")
+                # Estilos
+                estilos = getSampleStyleSheet()
+                estilo_titulo = ParagraphStyle(
+                    name='Titulo',
+                    fontSize=24,
+                    spaceAfter=-10,
+                    spaceBefore=5,  # Adiciona um pequeno espaço antes do título
+                    alignment=1  # Centraliza o título
+                )
+                estilo_normal = estilos['Normal']
 
+                # Título do relatório
+                titulo = Paragraph(f"Relatório de Movimentações ({tbImpr})", estilo_titulo)
 
-                # Salvar e fechar o PDF
-                self.r.showPage()
-                self.r.save()
+                elementos.append(titulo)
+                elementos.append(Table([[""]], colWidths=[19*cm], rowHeights=[1*cm]))  # 
+
+                # CABEÇALHO DA TABELA
+                dados = [["ORIGEM", "DESTINO", "DATA", "HORA", "RESPONSÁVEL"]]
+                for item in itens:
+                    if len(item) == 5:
+                        dados.append(list(item))
+
+                # ESTILO DA TABELA
+                estilo_tabela = TableStyle([
+                    ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                    ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+                    ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                    ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                    ('FONTSIZE', (0, 0), (-1, 0), 12),
+                    ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                    ('BACKGROUND', (0, 1), (-1, -1), colors.white),
+                    ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                    ('FONTSIZE', (0, 1), (-1, -1), 12),
+                ])
+
+                tabela = Table(dados, colWidths=[3.8*cm]*5)
+                tabela.setStyle(estilo_tabela)
+                elementos.append(tabela)
+
+                # Construir o PDF
+                doc.build(elementos)
+
                 printRelatorio(self, caminho_arquivo)
                 messagebox.showinfo("Relatório Gerado", "Relatório gerado com sucesso.")
 
@@ -126,11 +157,13 @@ def funcBtImprMov(self):
                 return False
             
             finally:
-                cursor2.close()   # Fechar o cursor2 após usar
-                conexao2.close()  # Fechar a conexão após usar
+                if cursor2:
+                    cursor2.close()
+                if conexao2:
+                    conexao2.close()
 
-        # Chamar a função para gerar o relatório
         gerarRelatorioMov(self)
+
 
 def funcBtImprDetal(self):
     tbImpr = str(self.inputTomboImpr.get())
