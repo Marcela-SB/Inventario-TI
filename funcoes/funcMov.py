@@ -54,6 +54,7 @@ def funcbtBuscarMov(self):
             WHERE {restricoes_sql} 
             ORDER BY m.data ASC, i.tombo ASC"""
             cursor.execute(query, parametros)
+            
             resultados = cursor.fetchall()  # Ler todos os resultados
 
             # Limpar Treeview
