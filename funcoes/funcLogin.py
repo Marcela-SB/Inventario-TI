@@ -27,7 +27,7 @@ def removeTuple(val):
     print(val, txt)
     return txt
 
-def getAcesso(self, user):
+def getAcesso(self, user): #ATUALIZAR VARIÁVEL GLOBAL DE USER
     responsa(user)
     conexao = conectar_bd(self)
     cursor = conexao.cursor()

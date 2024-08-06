@@ -1,5 +1,5 @@
 from modulos import *
-from funcoes.funcLogin import *
+from funcoes.funcNovoLogin import adicionarNovoUser
 
 def criarNovoUser(self):
     self.janela = Toplevel()
@@ -20,7 +20,7 @@ def criarNovoUser(self):
         font=("Inter Regular", 24 * -1),
         relief="flat", 
         border=2,
-        command= print("BT") #lambda: funcBtCriar(self)
+        command= lambda: adicionarNovoUser(self)
     )
     self.btCriar.place(
         relx= 0.6, 

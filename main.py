@@ -3,6 +3,7 @@ from modulos import *
 from conexaoBD import*
 from novoUser import *
 from funcoes.funcLogin import *
+from funcoes.funcNovoLogin import *
 from app import *
 
 
@@ -98,7 +99,7 @@ class Application:
             height= 35,
             width= 80
         )
-        # FUNÇÃO PARA ACIONAR BOTÃO AO APERTAR "ENTER"
+        # função para acionar botão "LOGIN" ao apertar "ENTER"
         self.root.bind('<Return>', lambda event:  show_app(self)) #validarUser(self)) 
         
 
@@ -110,7 +111,7 @@ class Application:
             font=("Inter Regular", 20 * -1),
             relief="flat", 
             border=2,
-            command=lambda: criarNovoUser(self)
+            command=lambda: validarAcesso(self, self.inputLogin.get(), self.inputSenha.get())
         )
         self.btNovoUser.place(
             relx = 0.2,
