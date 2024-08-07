@@ -102,7 +102,7 @@ def criarNovoUser(self):
     )
     self.selAcesso = ttk.Combobox(
         self.janela, 
-        values= ["adm", "bolsista", "tecnico"], 
+        values= ["admin", "bolsista", "tecnico"], 
         state="readonly", 
         width=10,
     )

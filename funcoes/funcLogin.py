@@ -1,3 +1,4 @@
+import bcrypt
 from modulos import *
 from conexaoBD import *
 
@@ -6,21 +7,7 @@ from conexaoBD import *
 def show_app(app_instance):
     app_instance.main_app.deiconify()  # Mostrar a janela principal do app
     app_instance.root.withdraw()  # Esconder a janela de login
-
-def verificarSenha(self, pw):
     
-    conexao = conectar_bd(self)
-    cursor = conexao.cursor()
-    query = "SELECT senha FROM user WHERE senha = %s"
-    cursor.execute(query, (pw,))
-    result = cursor.fetchall()
-    sExiste = False
-    for c in result:
-        if(c == (pw,)):
-            sExiste = True
-            show_app(self)
-    if(sExiste == False):
-        messagebox.showwarning("Erro", "Senha incorreta!!!")
 
 def removeTuple(val):
     txt = val[0]
@@ -33,7 +20,7 @@ def getAcesso(self, user): #ATUALIZAR VARIÁVEL GLOBAL DE USER
     cursor = conexao.cursor()
     query = "SELECT acesso FROM user WHERE nameUser = %s"
     cursor.execute(query, (user,))
-    acesso = cursor.fetchall()
+    acesso = cursor.fetchone()
     acesso = removeTuple(acesso[0])
     NivelUser(acesso)
     print(acesso)
@@ -49,7 +36,6 @@ def getAcesso(self, user): #ATUALIZAR VARIÁVEL GLOBAL DE USER
 def validarUser(self):
     global nameUser
     user = self.inputLogin.get()
-    
     pw = self.inputSenha.get()
     
     if(user and pw):
@@ -58,18 +44,25 @@ def validarUser(self):
             cursor = conexao.cursor()
 
             # verificarUser
-            query = "SELECT nameUser FROM user WHERE nameUser = %s"
+            query = "SELECT nameUser, senha FROM user WHERE nameUser = %s"
             cursor.execute(query, (user,))
-            result = cursor.fetchall()
-            existe = False
-            for c in result:
-                if(c == (user,)):
-                    existe = True
-                    verificarSenha(self, pw)
-            if (existe == False):
+            result = cursor.fetchone()
+
+            if result is None:
                 messagebox.showwarning("Erro", "Usuário não encontrado!") 
+                return
+
+            nameUser, senha = result
+
+            # Verifica a senha usando bcrypt
+            if bcrypt.checkpw(pw.encode('utf-8'), senha.encode('utf-8')):
+                show_app(self)
+            else:
+                messagebox.showwarning("Erro", "Senha incorreta!!!")
+                
         finally:
             getAcesso(self, user)
+            responsa(user)
             cursor.close()
             conexao.close()
     else:

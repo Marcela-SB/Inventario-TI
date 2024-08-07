@@ -61,6 +61,20 @@ mycursor.execute("""
     )
 """)
 
+# Criando tabela movimentacao
+mycursor.execute("""
+    CREATE TABLE IF NOT EXISTS user(
+        id INT NOT NULL AUTO_INCREMENT,
+        nameUser VARCHAR(16) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        acesso VARCHAR(20) NOT NULL,
+        senha VARCHAR(100) NOT NULL,
+        PRIMARY KEY (id),
+        UNIQUE KEY nameUser (nameUser),
+        UNIQUE KEY email (email)
+    )
+""")
+
 # Renomear coluna 'c1' para 'c2' na tabela 'tab'
 '''mycursor.execute("""
     ALTER TABLE tab 

@@ -1,3 +1,4 @@
+import bcrypt
 from modulos import *
 from conexaoBD import *
 
@@ -7,14 +8,17 @@ def validarAcesso(self, user, pw):
         cursor = conexao.cursor()
 
         cursor.execute("SELECT nameuser, acesso, senha FROM user WHERE nameuser = %s", (user,))
-        usuario = cursor.fetchall()
+        usuario = cursor.fetchone()
 
-        if len(usuario) == 0:
+        if usuario is None:
             messagebox.showerror("Erro", "Login ou senha incorreto(s)!")
             return
 
-        if usuario[0][0] == user and usuario[0][2] == pw:  # se usuário e senha estiverem corretos
-            if usuario[0][1] == "admin":
+        nameuser, acesso, senhaHashed = usuario
+
+        # Verifica a senha usando bcrypt
+        if nameuser==user and bcrypt.checkpw(pw.encode('utf-8'), senhaHashed.encode('utf-8')):  # se usuário e senha estiverem corretos
+            if acesso == "admin":
                 from novoUser import criarNovoUser  # Importar aqui para evitar o ciclo
                 criarNovoUser(self)
             else:
@@ -41,7 +45,9 @@ def adicionarNovoUser(self):
                 conexao = conectar_bd(self)
                 cursor = conexao.cursor()
 
-                cursor.execute("INSERT INTO user (nameuser, email, acesso, senha) VALUES (%s, %s, %s, %s)", (login, email, acesso, pw1))
+                pwHashed = bcrypt.hashpw(pw1.encode('utf-8'), bcrypt.gensalt()) # hashing da senha (encriptando)
+
+                cursor.execute("INSERT INTO user (nameuser, email, acesso, senha) VALUES (%s, %s, %s, %s)", (login, email, acesso, pwHashed))
                 conexao.commit()
 
                 messagebox.showinfo("Sucesso", "Usuário criado com sucesso!")

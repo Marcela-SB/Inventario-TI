@@ -52,7 +52,7 @@ def funcbtBuscarMov(self):
             FROM movimentacao m
             JOIN item i ON m.itemID = i.tombo 
             WHERE {restricoes_sql} 
-            ORDER BY m.data ASC, i.tombo ASC"""
+            ORDER BY m.data DESC, i.tombo ASC"""
             cursor.execute(query, parametros)
             
             resultados = cursor.fetchall()  # Ler todos os resultados
