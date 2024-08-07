@@ -2,6 +2,7 @@
 from modulos import *
 from conexaoBD import*
 from novoUser import *
+from mudarSenha import *
 from funcoes.funcLogin import *
 from funcoes.funcNovoLogin import *
 from app import *
@@ -18,7 +19,7 @@ class Application:
     def login_window(self):
         self.root.title("Login Sistema de Inventário")
         self.root.configure(bg="#D9D9D9")
-        self.root.geometry("400x200")  # Largura x Altura
+        self.root.geometry("400x210")  # Largura x Altura
         self.root.resizable(False, False)  # RESPONSIVIDADE
 
 # FRAME PRINCIPAL
@@ -36,52 +37,29 @@ class Application:
             relheight=0.78
         )'''
 
-        
-
-# LABELS
-        self.lbLogin = Label( 
-            self.root, 
-            text="Login:", 
-            bg="#D9D9D9",
-            font=("Ivy 15 bold"), 
-            fg= "black"                     
-        )
-        self.lbLogin.place(
-            relx = 0.1,
-            rely = 0.15
-        )
-        self.inputLogin = Entry(self.root, font=50)
-        self.inputLogin.place(
-            relx = 0.3,
-            rely = 0.15,
-            relwidth=0.58, 
-            height=30
-        )
-
-        self.lbSenha = Label( 
-            self.root, 
-            text="Senha:", 
-            bg="#D9D9D9",
-            font=("Ivy 15 bold"), 
-            fg= "black"                     
-        )
-        self.lbSenha.place(
-            relx = 0.1,
-            rely = 0.45
-        )
-        self.inputSenha = Entry(
-            self.root, 
-            font=50, 
-            show="*"
-        )
-        self.inputSenha.place(
-            relx = 0.3,
-            rely = 0.45,
-            relwidth=0.58, 
-            height=30
-        )
 
 # BOTÕES
+        # LABEL para mudança de senhas
+        self.btEsqueciSenha = Label(
+            self.root, 
+            bg="#D9D9D9",
+            fg="blue",
+            text="Esqueci a senha", 
+            font=("Inter Regular", 12 * -1),
+            relief="flat", 
+            borderwidth=2,
+            padx=10,
+            pady=5,
+            cursor="hand2"
+        )
+        self.btEsqueciSenha.place(
+            relx = 0.56,
+            rely = 0.54,
+            height= 35,
+            width= 160
+        )
+        self.btEsqueciSenha.bind("<Button-1>", mudarSenha)
+
         # Botão de Login para demonstrar o fluxo
         self.btLogin = Button(
             self.root, 
@@ -95,7 +73,7 @@ class Application:
         )
         self.btLogin.place(
             relx = 0.68,
-            rely = 0.7,
+            rely = 0.72,
             height= 35,
             width= 80
         )
@@ -115,9 +93,53 @@ class Application:
         )
         self.btNovoUser.place(
             relx = 0.2,
-            rely = 0.7,
+            rely = 0.72,
             height= 35,
             width= 100
+        )
+        
+
+# LABELS
+        self.lbLogin = Label( 
+            self.root, 
+            text="Login:", 
+            bg="#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"                     
+        )
+        self.lbLogin.place(
+            relx = 0.1,
+            rely = 0.12
+        )
+        self.inputLogin = Entry(self.root, font=50)
+        self.inputLogin.place(
+            relx = 0.3,
+            rely = 0.12,
+            relwidth=0.58, 
+            height=30
+        )
+
+        self.lbSenha = Label( 
+            self.root, 
+            text="Senha:", 
+            bg="#D9D9D9",
+            font=("Ivy 15 bold"), 
+            fg= "black"                     
+        )
+        self.lbSenha.place(
+            relx = 0.1,
+            rely = 0.42
+        )
+        self.inputSenha = Entry(
+            self.root, 
+            font=50, 
+            show="*"
+        )
+        self.inputSenha.place(
+            relx = 0.3,
+            rely = 0.42,
+            relwidth=0.58, 
+            height=30
         )
 
 

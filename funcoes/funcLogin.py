@@ -1,4 +1,3 @@
-import bcrypt
 from modulos import *
 from conexaoBD import *
 
