@@ -27,9 +27,9 @@ def alterarBt(ent):
 
 
 #VALIDAÇÃO NUMÉRICA DE TOMBO
-def validarEntrada(action, value):
+'''def validarEntrada(action, value):
     if action != '1':  # Não é uma ação de inserção, permite todas as ações de deleção
         return True
     if value.isdigit() and len(value) <= 12:  # Verifica se o valor é dígito e tem no máximo 12 caracteres
         return True
-    return False
+    return False'''

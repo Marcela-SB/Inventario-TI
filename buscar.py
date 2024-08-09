@@ -51,12 +51,12 @@ def buscar(self):
         relx = 0.05,
         rely = 0.05
     )
-    comandoValidacao = self.register(validarEntrada)
+    #comandoValidacao = self.register(validarEntrada)
     self.inputTomboBusc = Entry(
         self.aba_buscar, 
         font=50, 
-        validate="key", 
-        validatecommand=(comandoValidacao, '%d', '%P')
+        #validate="key", 
+        #validatecommand=(comandoValidacao, '%d', '%P')
     )
     self.inputTomboBusc.place(
         relx = 0.175,
@@ -162,4 +162,5 @@ def buscar(self):
         relheight=1
     )
 
-    self.lista.bind("<Double-1>", lambda event: cliqueDuploBusc(self))
+    self.lista.bind("<Double-1>", lambda event: cliqueDuploEsquerdoBusc(self))
+    self.lista.bind("<Button-3>", lambda event: cliqueDuploDireitoBusc(self))

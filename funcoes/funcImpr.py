@@ -35,7 +35,7 @@ def buscaImpressao(self):
             cursor = conexao.cursor()
 
             try:
-                cursor.execute(f"SELECT tombo, tipo, descricao, salaId, obs FROM item WHERE tombo LIKE '{numtb}%'")
+                cursor.execute(f"SELECT tombo, tipo, descricao, salaId, obs FROM item WHERE tombo LIKE '%{numtb}%'")
                 resultados = cursor.fetchall()  # Ler todos os resultados
 
                 # Limpar Treeview

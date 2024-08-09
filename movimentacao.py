@@ -3,6 +3,17 @@ from tkcalendar import Calendar
 from novaMovimentacao import *
 from funcoes.funcMov import *
 
+def funcbtSelCalendMov(self):
+        estadoAtual = self.radio_var.get()
+        novoEstado = not estadoAtual
+        self.radio_var.set(novoEstado)
+
+        if self.btSelCalendMov.config('text')[-1] == 'considerar':
+            self.btSelCalendMov.config(text='não considerar', bg="#ff9999")
+        else:
+            self.btSelCalendMov.config(text='considerar', bg="#c5ff99")
+        #print(novoEstado)
+        
 def movimentacao(self):
 # ----------- BOTÕES -----------         
     self.btNovaMov = Button(
@@ -59,16 +70,7 @@ def movimentacao(self):
         height=31
     )
     
-    def funcbtSelCalendMov(self):
-        estadoAtual = self.radio_var.get()
-        novoEstado = not estadoAtual
-        self.radio_var.set(novoEstado)
-
-        if self.btSelCalendMov.config('text')[-1] == 'considerar':
-            self.btSelCalendMov.config(text='não considerar', bg="#ff9999")
-        else:
-            self.btSelCalendMov.config(text='considerar', bg="#c5ff99")
-        #print(novoEstado)
+    
 
 
 # ----------- LABELS E INPUTS ----------- 
@@ -83,12 +85,12 @@ def movimentacao(self):
         relx = 0.05,
         rely = 0.05
     )
-    comandoValidacao = self.register(validarEntrada)
+    #comandoValidacao = self.register(validarEntrada)
     self.inputTomboMov = Entry(
         self.aba_movimentacao, 
         font=50, 
-        validate="key", 
-        validatecommand=(comandoValidacao, '%d', '%P')
+        #validate="key", 
+        #validatecommand=(comandoValidacao, '%d', '%P')
     )
     self.inputTomboMov.place(
         relx = 0.175,

@@ -21,7 +21,9 @@ def funcBtExcluir(self):
                 conexao = conectar_bd(self)
                 cursor = conexao.cursor()
                 try:
-                    cursor.execute("DELETE FROM item WHERE tombo = %s", (excTombo,))
+                    cursor.execute("DELETE FROM item WHERE tombo = %s", (excTombo,)) #exclui item
+                    conexao.commit()
+                    cursor.execute("DELETE FROM movimentacao WHERE itemID = %s", (excTombo,)) #exclui movimentações relacionadas
                     conexao.commit()
                     messagebox.showinfo("Sucesso", "Item excluído com sucesso!")
             

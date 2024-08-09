@@ -35,7 +35,7 @@ def funcbtBuscarMov(self):
 
         if tbMov:
             restricoes.append("i.tombo LIKE %s")
-            parametros.append(f"{tbMov}%")
+            parametros.append(f"%{tbMov}%")
 
         if getData:
             restricoes.append("m.data = %s")

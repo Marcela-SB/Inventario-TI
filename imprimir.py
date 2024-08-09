@@ -63,14 +63,14 @@ def imprimir(self):
         rely = 0.05
     )
     
-    comandoValidacao = self.register(validarEntrada)
+    #comandoValidacao = self.register(validarEntrada)
     self.tombo_var = tk.StringVar()
     self.inputTomboImpr = Entry(
         self.aba_imprimir, 
         font=50, 
-        validate= "key",
-        textvariable=self.tombo_var, 
-        validatecommand=(comandoValidacao, '%d', '%P')
+        #validate= "key",
+        #validatecommand=(comandoValidacao, '%d', '%P'),
+        textvariable=self.tombo_var 
     )
     self.inputTomboImpr.place(
         relx = 0.175,
@@ -189,6 +189,11 @@ def imprimir(self):
     self.conferindo.heading("#5", text="OBS")
 
     self.conferindo.column("#0", width=0, stretch=tk.NO)
+    self.conferindo.column("#1", anchor="center")
+    self.conferindo.column("#2", anchor="center")
+    self.conferindo.column("#3", anchor="center")
+    self.conferindo.column("#4", anchor="center")
+    self.conferindo.column("#5", anchor="center")
 
     self.conferindo.place(
         relx= 0.0, 

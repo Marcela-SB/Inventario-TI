@@ -3,10 +3,7 @@ from conexaoBD import *
 
 tk.botao = ""
 
-def cliqueDuploBusc(self):
-    global bt
-    alterarBt("edit")
-    print(config.bt)
+def cliqueDuploEsquerdoBusc(self):
     self.inputTomboGer.delete(0,END)
     self.inputItemGer.delete(0, END)
     self.inputDescricaoGer.delete(0,END)
@@ -25,6 +22,22 @@ def cliqueDuploBusc(self):
 
     
     self.after(250, self.notebook.select(self.aba_gerenciar))
+
+def cliqueDuploDireitoBusc(self):
+    self.inputTomboMov.delete(0,END)
+    self.valor_comboboxMov.set("")
+
+    self.lista.selection()
+
+    for n in self.lista.selection():   
+        colunas = self.lista.item(n, 'values')
+        self.inputTomboMov.insert(END, colunas[0])
+        self.valor_comboboxMov.set(colunas[3])
+        self.radio_var.set(False)
+        self.btSelCalendMov.config(text='não considerar', bg="#ff9999")
+
+    
+    self.after(250, self.notebook.select(self.aba_movimentacao))
 
 
 def funcBtBuscar(self):
@@ -45,11 +58,11 @@ def funcBtBuscar(self):
 
         if buscTombo:
             restricoes.append("tombo LIKE %s")
-            parametros.append(f"{buscTombo}%")
+            parametros.append(f"%{buscTombo}%")
         
         if buscItem:
             restricoes.append("tipo LIKE %s")
-            parametros.append(f"{buscItem}%")
+            parametros.append(f"%{buscItem}%")
         
         if buscSala:
             restricoes.append("salaId = %s")

@@ -85,9 +85,6 @@ def gerenciar(self):
         width=180, 
         height=61
     )
-    
-    '''balaoExcluir = tix.Balloon(self.aba_gerenciar)
-    balaoExcluir.bind_widget(self.btExcluir, balloonmsg = "Necessário apenas o TOMBO")'''
 
     self.btSalvarInventario = Button(
         self.aba_gerenciar,
@@ -137,12 +134,12 @@ def gerenciar(self):
         relx = 0.05,
         rely = 0.05
     )
-    comandoValidacao = self.register(validarEntrada)
+    #comandoValidacao = self.register(validarEntrada)
     self.inputTomboGer = Entry(
         self.aba_gerenciar, 
         font=50, 
-        validate="key", 
-        validatecommand=(comandoValidacao, '%d', '%P')
+        #validate="key", 
+        #validatecommand=(comandoValidacao, '%d', '%P')
     )
     self.inputTomboGer.place(
         relx = 0.175,
