@@ -1,5 +1,7 @@
 from modulos import *
 from funcoes.funcGeren import *
+from funcoes.funcInvent import *
+from realizarInventario import *
 from config import bt
 
 Vbt = config.bt
@@ -84,6 +86,23 @@ def gerenciar(self):
         rely=0.3, 
         width=180, 
         height=61
+    )
+
+    self.btCriarInventario = Button(
+        self.aba_gerenciar,
+        bg= "turquoise",
+        fg= "#FFFFFF",
+        text="Realizar\nInventário",
+        font=("Inter Regular", 24 * -1),
+        relief="flat", 
+        border=2,
+        command= lambda: realizarInventario(self)
+    )
+    self.btCriarInventario.place(
+        relx= 0.4, 
+        rely=0.62, 
+        width=180, 
+        height=70
     )
 
     self.btSalvarInventario = Button(
