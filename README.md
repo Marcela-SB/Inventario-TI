@@ -15,8 +15,10 @@ Linguagem: ![Python](https://img.shields.io/badge/-Python-0D1117?style=for-the-b
 
 Bibliotecas: 
 - Tkinter
-- 
-- 
+- Pillow (PIL):  ```pip install pillow```
+- bcrypt: ```pip install bcrypt```
+- mysql.connector: ```pip install mysql-connector-python```
+- config: ```pip install python-decouple``` ou ```pip install configparser```
 
 </br>
 
